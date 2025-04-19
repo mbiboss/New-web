@@ -10,45 +10,72 @@
     <canvas id="matrix"></canvas>
     <div class="particles-container"></div>
     
+    <!-- Glitch Loader -->
     <div class="glitch-overlay"></div>
 
+    <!-- Cyberpunk Navigation -->
     <nav class="cyber-nav">
         <button class="theme-toggle" aria-label="Toggle theme">ⓣⓗⓔⓜⓔ</button>
         <a href="#home" class="nav-link active">// HOME</a>
         <a href="#about" class="nav-link">// ABOUT</a>
         <a href="#contact" class="nav-link">// CONTACT</a>
+        <a href="#map" class="nav-link">// MAP</a>
     </nav>
 
+    <!-- Main Content Sections -->
     <main>
         <section id="home" class="content-section active">
             <h1 class="cyber-title glitch">DARK</h1>
             <p class="cyber-text">>_ INITIALIZING CYBERSPACE PROTOCOL</p>
+            <div class="scanline"></div>
         </section>
 
         <section id="about" class="content-section">
-            <h2 class="cyber-subtitle">// ABOUT</h2>
-            <p class="cyber-text">>_ CYBERPUNK SYSTEMS ACTIVE</p>
+            <h2 class="cyber-subtitle">// SYSTEM STATUS</h2>
             <div class="cyber-grid">
-                <div class="cyber-card" data-glitch="SECURITY">SECURITY</div>
-                <div class="cyber-card" data-glitch="NETWORK">NETWORK</div>
-                <div class="cyber-card" data-glitch="AI">AI</div>
+                <div class="cyber-card" data-glitch="SECURITY">
+                    <span class="led green"></span>
+                    ENCRYPTION: 98%
+                </div>
+                <div class="cyber-card" data-glitch="NETWORK">
+                    <span class="led blue"></span>
+                    BANDWIDTH: 1.2TB/s
+                </div>
+                <div class="cyber-card" data-glitch="AI">
+                    <span class="led red"></span>
+                    NEURAL_LOAD: 74%
+                </div>
             </div>
         </section>
 
         <section id="contact" class="content-section">
-            <h2 class="cyber-subtitle">// CONTACT</h2>
+            <h2 class="cyber-subtitle">// CONTACT MATRIX</h2>
             <form class="cyber-form">
-                <input type="text" class="cyber-input" placeholder="NAME">
-                <input type="email" class="cyber-input" placeholder="EMAIL">
-                <textarea class="cyber-input" placeholder="MESSAGE"></textarea>
-                <button type="submit" class="cyber-button">SEND</button>
+                <div class="input-group">
+                    <input type="text" class="cyber-input" placeholder="IDENTITY">
+                    <span class="input-border"></span>
+                </div>
+                <div class="input-group">
+                    <input type="email" class="cyber-input" placeholder="CYBERMAIL">
+                    <span class="input-border"></span>
+                </div>
+                <div class="input-group">
+                    <textarea class="cyber-input" placeholder="MESSAGE"></textarea>
+                    <span class="input-border"></span>
+                </div>
+                <button type="submit" class="cyber-button">
+                    <span class="button-text">TRANSMIT</span>
+                    <div class="button-loader"></div>
+                </button>
             </form>
         </section>
 
         <section id="map" class="content-section">
+            <h2 class="cyber-subtitle">// DHAKA GRID</h2>
             <div class="map-container">
                 <iframe src="https://maps.google.com/maps?q=Dhaka&t=k&z=13&ie=UTF8&iwloc=&output=embed" 
                         class="cyber-map"></iframe>
+                <div class="map-overlay"></div>
             </div>
         </section>
     </main>
