@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DARK</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <canvas id="matrix"></canvas>
+    <div class="particles-container"></div>
+    
+    <div class="glitch-overlay"></div>
+
+    <nav class="cyber-nav">
+        <button class="theme-toggle" aria-label="Toggle theme">ⓣⓗⓔⓜⓔ</button>
+        <a href="#home" class="nav-link active">// HOME</a>
+        <a href="#about" class="nav-link">// ABOUT</a>
+        <a href="#contact" class="nav-link">// CONTACT</a>
+    </nav>
+
+    <main>
+        <section id="home" class="content-section active">
+            <h1 class="cyber-title glitch">DARK</h1>
+            <p class="cyber-text">>_ INITIALIZING CYBERSPACE PROTOCOL</p>
+        </section>
+
+        <section id="about" class="content-section">
+            <h2 class="cyber-subtitle">// ABOUT</h2>
+            <p class="cyber-text">>_ CYBERPUNK SYSTEMS ACTIVE</p>
+            <div class="cyber-grid">
+                <div class="cyber-card" data-glitch="SECURITY">SECURITY</div>
+                <div class="cyber-card" data-glitch="NETWORK">NETWORK</div>
+                <div class="cyber-card" data-glitch="AI">AI</div>
+            </div>
+        </section>
+
+        <section id="contact" class="content-section">
+            <h2 class="cyber-subtitle">// CONTACT</h2>
+            <form class="cyber-form">
+                <input type="text" class="cyber-input" placeholder="NAME">
+                <input type="email" class="cyber-input" placeholder="EMAIL">
+                <textarea class="cyber-input" placeholder="MESSAGE"></textarea>
+                <button type="submit" class="cyber-button">SEND</button>
+            </form>
+        </section>
+
+        <section id="map" class="content-section">
+            <div class="map-container">
+                <iframe src="https://maps.google.com/maps?q=Dhaka&t=k&z=13&ie=UTF8&iwloc=&output=embed" 
+                        class="cyber-map"></iframe>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
