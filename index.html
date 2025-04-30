@@ -1,85 +1,1199 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DARK</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mystic Hands by Sadiya | Premium Henna Art & Design</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#8B4513',secondary:'#DAA520'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+body {
+font-family: 'Poppins', sans-serif;
+transition: background-color 0.3s ease, color 0.3s ease;
+}
+body.dark-mode {
+background-color: #1a1a1a;
+color: #ffffff;
+}
+body.dark-mode header {
+background-color: rgba(26, 26, 26, 0.95);
+}
+body.dark-mode .bg-white {
+background-color: #2d2d2d;
+}
+body.dark-mode .text-gray-800 {
+color: #e5e5e5;
+}
+body.dark-mode .text-gray-700 {
+color: #d1d1d1;
+}
+body.dark-mode .text-gray-600 {
+color: #bdbdbd;
+}
+body.dark-mode .border-gray-300 {
+border-color: #404040;
+}
+body.dark-mode .bg-gray-50 {
+background-color: #262626;
+}
+section {
+transition: opacity 0.5s ease;
+}
+h1, h2, h3, h4, h5, h6 {
+font-family: 'Playfair Display', serif;
+}
+.logo {
+font-family: 'Pacifico', serif;
+}
+.hero-section {
+background-image: url('https://readdy.ai/api/search-image?query=luxury%20henna%20design%20background%20with%20gold%20accents%20and%20soft%20brown%20tones%2C%20elegant%20pattern%2C%20professional%20photography%2C%20high-end%20aesthetic%2C%20artistic%20background%20with%20space%20for%20text%20on%20left%20side%2C%20detailed%20henna%20patterns%20visible%20on%20right%20side%2C%20soft%20lighting&width=1920&height=1080&seq=hero1&orientation=landscape');
+background-size: cover;
+background-position: center;
+}
+.particle-container {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+overflow: hidden;
+z-index: 0;
+}
+.particle {
+position: absolute;
+pointer-events: none;
+display: flex;
+align-items: center;
+justify-content: center;
+transform-origin: center;
+animation: floatAndRotate 20s linear infinite;
+}
+@keyframes floatAndRotate {
+0% {
+transform: translate(0, 0) rotate(0deg);
+}
+25% {
+transform: translate(100px, -50px) rotate(90deg);
+}
+50% {
+transform: translate(200px, 0) rotate(180deg);
+}
+75% {
+transform: translate(100px, 50px) rotate(270deg);
+}
+100% {
+transform: translate(0, 0) rotate(360deg);
+}
+}
+.gallery-item:hover .gallery-overlay {
+opacity: 1;
+}
+.service-card {
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.service-card:hover {
+transform: translateY(-10px);
+box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+.testimonial-card {
+transition: transform 0.3s ease;
+}
+.testimonial-card:hover {
+transform: scale(1.02);
+}
+input[type="checkbox"] {
+appearance: none;
+-webkit-appearance: none;
+height: 24px;
+width: 24px;
+background-color: #fff;
+border: 2px solid #8B4513;
+border-radius: 4px;
+cursor: pointer;
+display: flex;
+align-items: center;
+justify-content: center;
+outline: none;
+}
+input[type="checkbox"]:checked {
+background-color: #8B4513;
+}
+input[type="checkbox"]:checked::after {
+content: "✓";
+color: white;
+font-size: 16px;
+}
+.switch {
+position: relative;
+display: inline-block;
+width: 60px;
+height: 30px;
+}
+.switch input {
+opacity: 0;
+width: 0;
+height: 0;
+}
+.slider {
+position: absolute;
+cursor: pointer;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-color: #ccc;
+transition: .4s;
+border-radius: 30px;
+}
+.slider:before {
+position: absolute;
+content: "";
+height: 22px;
+width: 22px;
+left: 4px;
+bottom: 4px;
+background-color: white;
+transition: .4s;
+border-radius: 50%;
+}
+input:checked + .slider {
+background-color: #8B4513;
+}
+input:checked + .slider:before {
+transform: translateX(30px);
+}
+.whatsapp-button {
+position: fixed;
+bottom: 30px;
+right: 30px;
+z-index: 999;
+}
+</style>
 </head>
-<body>
-    <canvas id="matrix"></canvas>
-    <div class="particles-container"></div>
-    
-    <!-- Glitch Loader -->
-    <div class="glitch-overlay"></div>
-
-    <!-- Cyberpunk Navigation -->
-    <nav class="cyber-nav">
-        <button class="theme-toggle" aria-label="Toggle theme">ⓣⓗⓔⓜⓔ</button>
-        <a href="#home" class="nav-link active">// HOME</a>
-        <a href="#about" class="nav-link">// ABOUT</a>
-        <a href="#contact" class="nav-link">// CONTACT</a>
-        <a href="#map" class="nav-link">// MAP</a>
-    </nav>
-
-    <!-- Main Content Sections -->
-    <main>
-        <section id="home" class="content-section active">
-            <h1 class="cyber-title glitch">DARK</h1>
-            <p class="cyber-text">>_ INITIALIZING CYBERSPACE PROTOCOL</p>
-            <div class="scanline"></div>
-        </section>
-
-        <section id="about" class="content-section">
-            <h2 class="cyber-subtitle">// SYSTEM STATUS</h2>
-            <div class="cyber-grid">
-                <div class="cyber-card" data-glitch="SECURITY">
-                    <span class="led green"></span>
-                    ENCRYPTION: 98%
-                </div>
-                <div class="cyber-card" data-glitch="NETWORK">
-                    <span class="led blue"></span>
-                    BANDWIDTH: 1.2TB/s
-                </div>
-                <div class="cyber-card" data-glitch="AI">
-                    <span class="led red"></span>
-                    NEURAL_LOAD: 74%
-                </div>
-            </div>
-        </section>
-
-        <section id="contact" class="content-section">
-            <h2 class="cyber-subtitle">// CONTACT MATRIX</h2>
-            <form class="cyber-form">
-                <div class="input-group">
-                    <input type="text" class="cyber-input" placeholder="IDENTITY">
-                    <span class="input-border"></span>
-                </div>
-                <div class="input-group">
-                    <input type="email" class="cyber-input" placeholder="CYBERMAIL">
-                    <span class="input-border"></span>
-                </div>
-                <div class="input-group">
-                    <textarea class="cyber-input" placeholder="MESSAGE"></textarea>
-                    <span class="input-border"></span>
-                </div>
-                <button type="submit" class="cyber-button">
-                    <span class="button-text">TRANSMIT</span>
-                    <div class="button-loader"></div>
-                </button>
-            </form>
-        </section>
-
-        <section id="map" class="content-section">
-            <h2 class="cyber-subtitle">// DHAKA GRID</h2>
-            <div class="map-container">
-                <iframe src="https://maps.google.com/maps?q=Dhaka&t=k&z=13&ie=UTF8&iwloc=&output=embed" 
-                        class="cyber-map"></iframe>
-                <div class="map-overlay"></div>
-            </div>
-        </section>
-    </main>
-
-    <script src="script.js"></script>
+<body class="bg-white text-gray-800">
+<!-- Header -->
+<header class="fixed w-full bg-white bg-opacity-95 shadow-md z-50 transition-all duration-300">
+<div class="container mx-auto px-6 py-4">
+<div class="flex items-center justify-between">
+<a href="#" class="logo text-primary text-2xl font-bold">Mystic Hands</a>
+<nav class="hidden md:flex space-x-8">
+<a href="#" class="text-primary font-medium hover:text-secondary transition-colors">Home</a>
+<a href="#about" class="font-medium hover:text-primary transition-colors">About</a>
+<a href="#gallery" class="font-medium hover:text-primary transition-colors">Gallery</a>
+<a href="#testimonials" class="font-medium hover:text-primary transition-colors">Testimonials</a>
+<a href="#booking" class="font-medium hover:text-primary transition-colors">Booking</a>
+</nav>
+<div class="flex items-center space-x-4">
+<button id="darkModeToggle" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-all duration-300 transform hover:rotate-180">
+<i class="ri-sun-line ri-lg transition-transform duration-300"></i>
+</button>
+<button class="md:hidden w-10 h-10 flex items-center justify-center" id="mobileMenuButton">
+<i class="ri-menu-line ri-lg"></i>
+</button>
+</div>
+</div>
+<!-- Mobile Menu -->
+<div class="md:hidden hidden" id="mobileMenu">
+<div class="flex flex-col space-y-4 mt-4 pb-4">
+<a href="#" class="font-medium hover:text-primary transition-colors">Home</a>
+<a href="#about" class="font-medium hover:text-primary transition-colors">About</a>
+<a href="#gallery" class="font-medium hover:text-primary transition-colors">Gallery</a>
+<a href="#testimonials" class="font-medium hover:text-primary transition-colors">Testimonials</a>
+<a href="#booking" class="font-medium hover:text-primary transition-colors">Booking</a>
+</div>
+</div>
+</div>
+</header>
+<!-- Hero Section -->
+<section class="hero-section relative min-h-screen flex items-center">
+<div class="particle-container" id="particles"></div>
+<div class="container mx-auto px-6 py-24 z-10">
+<div class="flex flex-col md:flex-row items-center">
+<div class="w-full md:w-1/2 text-center md:text-left mb-12 md:mb-0">
+<h1 class="text-4xl md:text-6xl font-bold text-primary mb-6">Mystic Hands by Sadiya</h1>
+<p class="text-xl md:text-2xl mb-8 text-gray-700">Premium Henna Art & Design with 15+ years of experience</p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+<a href="#booking" class="bg-primary text-white px-8 py-3 rounded-button text-lg font-medium hover:bg-opacity-90 transition-colors whitespace-nowrap">Book Now</a>
+<a href="#gallery" class="border-2 border-primary text-primary px-8 py-3 rounded-button text-lg font-medium hover:bg-primary hover:text-white transition-colors whitespace-nowrap">View Gallery</a>
+</div>
+</div>
+<div class="w-full md:w-1/2 relative">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=professional%20female%20henna%20artist%20with%20beautiful%20intricate%20henna%20designs%20on%20her%20hands%2C%20wearing%20elegant%20traditional%20clothing%20with%20modern%20touch%2C%20soft%20lighting%2C%20professional%20photography%2C%20warm%20tones%2C%20artistic%20portrait%2C%20confident%20pose&width=600&height=800&seq=artist1&orientation=portrait" alt="Sadiya Afrin Jui - Henna Artist" class="rounded-xl shadow-2xl mx-auto">
+<!-- Floating Design Cards -->
+<div class="absolute -top-10 -left-10 bg-white p-4 rounded-lg shadow-lg transform rotate-6 hidden md:block">
+<img src="https://readdy.ai/api/search-image?query=close-up%20detailed%20intricate%20henna%20design%20on%20palm%2C%20traditional%20pattern%2C%20professional%20photography%2C%20soft%20lighting&width=200&height=200&seq=design1&orientation=squarish" alt="Henna Design" class="w-24 h-24 object-cover rounded">
+</div>
+<div class="absolute -bottom-10 -right-10 bg-white p-4 rounded-lg shadow-lg transform -rotate-6 hidden md:block">
+<img src="https://readdy.ai/api/search-image?query=close-up%20detailed%20intricate%20henna%20design%20on%20back%20of%20hand%2C%20modern%20pattern%2C%20professional%20photography%2C%20soft%20lighting&width=200&height=200&seq=design2&orientation=squarish" alt="Henna Design" class="w-24 h-24 object-cover rounded">
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- About Section -->
+<section id="about" class="py-20 bg-gray-50">
+<div class="container mx-auto px-6">
+<div class="text-center mb-16">
+<h2 class="text-4xl font-bold text-primary mb-4">About The Artist</h2>
+<div class="w-24 h-1 bg-secondary mx-auto"></div>
+</div>
+<div class="flex flex-col md:flex-row items-center gap-12">
+<div class="w-full md:w-1/2">
+<img src="https://readdy.ai/api/search-image?query=professional%20female%20henna%20artist%20working%20on%20clients%20hand%2C%20focused%20expression%2C%20elegant%20workspace%20with%20henna%20supplies%2C%20soft%20natural%20lighting%2C%20artistic%20environment%2C%20professional%20photography&width=600&height=800&seq=artist2&orientation=portrait" alt="Sadiya Afrin Jui at work" class="rounded-xl shadow-xl">
+</div>
+<div class="w-full md:w-1/2">
+<h3 class="text-3xl font-bold text-primary mb-6">Sadiya Afrin Jui</h3>
+<p class="text-lg mb-6">With over 15 years of experience, Sadiya has mastered the ancient art of henna, blending traditional techniques with contemporary designs to create stunning, personalized artwork for her clients.</p>
+<div class="mb-8">
+<h4 class="text-xl font-semibold mb-4">Expertise</h4>
+<ul class="space-y-3">
+<li class="flex items-center">
+<div class="w-6 h-6 flex items-center justify-center text-primary mr-3">
+<i class="ri-check-line"></i>
+</div>
+<span>Bridal Henna (Bengali, Arabic, Indian styles)</span>
+</li>
+<li class="flex items-center">
+<div class="w-6 h-6 flex items-center justify-center text-primary mr-3">
+<i class="ri-check-line"></i>
+</div>
+<span>Festival & Celebration Designs</span>
+</li>
+<li class="flex items-center">
+<div class="w-6 h-6 flex items-center justify-center text-primary mr-3">
+<i class="ri-check-line"></i>
+</div>
+<span>Contemporary Fusion Patterns</span>
+</li>
+<li class="flex items-center">
+<div class="w-6 h-6 flex items-center justify-center text-primary mr-3">
+<i class="ri-check-line"></i>
+</div>
+<span>Natural Organic Henna Preparation</span>
+</li>
+</ul>
+</div>
+<div class="flex flex-wrap gap-4">
+<div class="bg-white p-6 rounded-lg shadow-md flex-1 min-w-[200px]">
+<div class="text-3xl font-bold text-primary mb-2">15+</div>
+<div class="text-gray-600">Years Experience</div>
+</div>
+<div class="bg-white p-6 rounded-lg shadow-md flex-1 min-w-[200px]">
+<div class="text-3xl font-bold text-primary mb-2">2,500+</div>
+<div class="text-gray-600">Happy Clients</div>
+</div>
+<div class="bg-white p-6 rounded-lg shadow-md flex-1 min-w-[200px]">
+<div class="text-3xl font-bold text-primary mb-2">300+</div>
+<div class="text-gray-600">Bridal Projects</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Gallery Section -->
+<section id="gallery" class="py-20">
+<div class="container mx-auto px-6">
+<div class="text-center mb-16">
+<h2 class="text-4xl font-bold text-primary mb-4">Gallery</h2>
+<p class="text-xl text-gray-600 mb-6">Explore my portfolio of henna designs</p>
+<div class="w-24 h-1 bg-secondary mx-auto"></div>
+</div>
+<!-- Gallery Filter -->
+<div class="flex flex-wrap justify-center gap-4 mb-12">
+<button class="gallery-filter px-6 py-2 rounded-full bg-primary text-white whitespace-nowrap !rounded-button" data-filter="all">All Designs</button>
+<button class="gallery-filter px-6 py-2 rounded-full bg-white border border-primary text-primary whitespace-nowrap !rounded-button" data-filter="bridal">Bridal</button>
+<button class="gallery-filter px-6 py-2 rounded-full bg-white border border-primary text-primary whitespace-nowrap !rounded-button" data-filter="events">Events</button>
+<button class="gallery-filter px-6 py-2 rounded-full bg-white border border-primary text-primary whitespace-nowrap !rounded-button" data-filter="traditional">Traditional</button>
+<button class="gallery-filter px-6 py-2 rounded-full bg-white border border-primary text-primary whitespace-nowrap !rounded-button" data-filter="modern">Modern</button>
+</div>
+<!-- Gallery Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+<!-- Gallery Item 1 -->
+<div class="gallery-item group relative overflow-hidden rounded-lg shadow-lg" data-category="bridal">
+<img src="https://readdy.ai/api/search-image?query=close-up%20of%20intricate%20bridal%20henna%20design%20on%20hands%20and%20arms%2C%20detailed%20patterns%2C%20professional%20photography%2C%20soft%20lighting%2C%20wedding%20preparation&width=600&height=800&seq=gallery1&orientation=portrait" alt="Bridal Henna Design" class="w-full h-80 object-cover object-top transition-transform duration-500 group-hover:scale-110">
+<div class="gallery-overlay absolute inset-0 bg-primary bg-opacity-70 opacity-0 transition-opacity duration-300 flex flex-col justify-end p-4">
+<h3 class="text-white text-xl font-bold">Bridal Collection</h3>
+<p class="text-white text-sm">Traditional Bengali Bridal Design</p>
+</div>
+</div>
+<!-- Gallery Item 2 -->
+<div class="gallery-item group relative overflow-hidden rounded-lg shadow-lg" data-category="events">
+<img src="https://readdy.ai/api/search-image?query=elegant%20henna%20design%20for%20special%20event%2C%20celebration%20henna%20art%20on%20hands%2C%20festive%20occasion%20design%2C%20professional%20photography%2C%20soft%20lighting&width=600&height=800&seq=gallery2&orientation=portrait" alt="Event Henna Design" class="w-full h-80 object-cover object-top transition-transform duration-500 group-hover:scale-110">
+<div class="gallery-overlay absolute inset-0 bg-primary bg-opacity-70 opacity-0 transition-opacity duration-300 flex flex-col justify-end p-4">
+<h3 class="text-white text-xl font-bold">Festival Collection</h3>
+<p class="text-white text-sm">Eid Celebration Design</p>
+</div>
+</div>
+<!-- Gallery Item 3 -->
+<div class="gallery-item group relative overflow-hidden rounded-lg shadow-lg" data-category="traditional">
+<img src="https://readdy.ai/api/search-image?query=traditional%20henna%20pattern%20with%20cultural%20motifs%2C%20detailed%20heritage%20design%2C%20professional%20photography%2C%20soft%20lighting%2C%20authentic%20henna%20art&width=600&height=800&seq=gallery3&orientation=portrait" alt="Traditional Henna Design" class="w-full h-80 object-cover object-top transition-transform duration-500 group-hover:scale-110">
+<div class="gallery-overlay absolute inset-0 bg-primary bg-opacity-70 opacity-0 transition-opacity duration-300 flex flex-col justify-end p-4">
+<h3 class="text-white text-xl font-bold">Traditional Art</h3>
+<p class="text-white text-sm">Classic Patterns</p>
+</div>
+</div>
+<!-- Gallery Item 4 -->
+<div class="gallery-item group relative overflow-hidden rounded-lg shadow-lg" data-category="modern">
+<img src="https://readdy.ai/api/search-image?query=contemporary%20minimalist%20henna%20design%2C%20modern%20geometric%20patterns%2C%20professional%20photography%2C%20soft%20lighting%2C%20trendy%20henna%20art&width=600&height=800&seq=gallery4&orientation=portrait" alt="Modern Henna Design" class="w-full h-80 object-cover object-top transition-transform duration-500 group-hover:scale-110">
+<div class="gallery-overlay absolute inset-0 bg-primary bg-opacity-70 opacity-0 transition-opacity duration-300 flex flex-col justify-end p-4">
+<h3 class="text-white text-xl font-bold">Modern Collection</h3>
+<p class="text-white text-sm">Contemporary Minimalist Design</p>
+</div>
+</div>
+<!-- Gallery Item 5 -->
+<div class="gallery-item group relative overflow-hidden rounded-lg shadow-lg" data-category="bridal">
+<img src="https://readdy.ai/api/search-image?query=elaborate%20bridal%20henna%20design%20covering%20full%20arms%20and%20hands%2C%20wedding%20preparation%2C%20professional%20photography%2C%20soft%20lighting%2C%20luxury%20henna%20art&width=600&height=800&seq=gallery5&orientation=portrait" alt="Bridal Henna Design" class="w-full h-80 object-cover object-top transition-transform duration-500 group-hover:scale-110">
+<div class="gallery-overlay absolute inset-0 bg-primary bg-opacity-70 opacity-0 transition-opacity duration-300 flex flex-col justify-end p-4">
+<h3 class="text-white text-xl font-bold">Bridal Collection</h3>
+<p class="text-white text-sm">Full Arm Design</p>
+</div>
+</div>
+<!-- Gallery Item 6 -->
+<div class="gallery-item group relative overflow-hidden rounded-lg shadow-lg" data-category="events">
+<img src="https://readdy.ai/api/search-image?query=festive%20henna%20design%20for%20celebration%2C%20event%20henna%20art%20on%20feet%2C%20professional%20photography%2C%20soft%20lighting%2C%20special%20occasion%20henna&width=600&height=800&seq=gallery6&orientation=portrait" alt="Event Henna Design" class="w-full h-80 object-cover object-top transition-transform duration-500 group-hover:scale-110">
+<div class="gallery-overlay absolute inset-0 bg-primary bg-opacity-70 opacity-0 transition-opacity duration-300 flex flex-col justify-end p-4">
+<h3 class="text-white text-xl font-bold">Festival Collection</h3>
+<p class="text-white text-sm">Foot Design for Celebrations</p>
+</div>
+</div>
+<!-- Gallery Item 7 -->
+<div class="gallery-item group relative overflow-hidden rounded-lg shadow-lg" data-category="traditional">
+<img src="https://readdy.ai/api/search-image?query=intricate%20traditional%20henna%20design%20with%20cultural%20symbols%2C%20detailed%20heritage%20pattern%2C%20professional%20photography%2C%20soft%20lighting%2C%20authentic%20henna%20art&width=600&height=800&seq=gallery7&orientation=portrait" alt="Traditional Henna Design" class="w-full h-80 object-cover object-top transition-transform duration-500 group-hover:scale-110">
+<div class="gallery-overlay absolute inset-0 bg-primary bg-opacity-70 opacity-0 transition-opacity duration-300 flex flex-col justify-end p-4">
+<h3 class="text-white text-xl font-bold">Traditional Art</h3>
+<p class="text-white text-sm">Heritage Patterns</p>
+</div>
+</div>
+<!-- Gallery Item 8 -->
+<div class="gallery-item group relative overflow-hidden rounded-lg shadow-lg" data-category="modern">
+<img src="https://readdy.ai/api/search-image?query=contemporary%20abstract%20henna%20design%2C%20modern%20artistic%20pattern%2C%20professional%20photography%2C%20soft%20lighting%2C%20trendy%20minimalist%20henna%20art&width=600&height=800&seq=gallery8&orientation=portrait" alt="Modern Henna Design" class="w-full h-80 object-cover object-top transition-transform duration-500 group-hover:scale-110">
+<div class="gallery-overlay absolute inset-0 bg-primary bg-opacity-70 opacity-0 transition-opacity duration-300 flex flex-col justify-end p-4">
+<h3 class="text-white text-xl font-bold">Modern Collection</h3>
+<p class="text-white text-sm">Abstract Contemporary Design</p>
+</div>
+</div>
+</div>
+<div class="text-center mt-12">
+<button class="bg-primary text-white px-8 py-3 rounded-button text-lg font-medium hover:bg-opacity-90 transition-colors whitespace-nowrap">View All Works</button>
+</div>
+</div>
+</section>
+<!-- Services Section -->
+<section class="py-20 bg-gray-50">
+<div class="container mx-auto px-6">
+<div class="text-center mb-16">
+<h2 class="text-4xl font-bold text-primary mb-4">Premium Services</h2>
+<p class="text-xl text-gray-600 mb-6">Customized henna experiences for every occasion</p>
+<div class="w-24 h-1 bg-secondary mx-auto"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Service Card 1 -->
+<div class="service-card bg-white rounded-xl shadow-lg overflow-hidden">
+<div class="h-48 bg-primary flex items-center justify-center">
+<img src="https://readdy.ai/api/search-image?query=elegant%20bridal%20henna%20preparation%2C%20wedding%20henna%20session%2C%20professional%20photography%2C%20soft%20lighting%2C%20luxury%20henna%20experience&width=600&height=400&seq=service1&orientation=landscape" alt="Bridal Henna Service" class="w-full h-full object-cover">
+</div>
+<div class="p-8">
+<h3 class="text-2xl font-bold text-primary mb-4">Bridal Package</h3>
+<ul class="space-y-3 mb-6">
+<li class="flex items-start">
+<div class="w-6 h-6 flex items-center justify-center text-primary mr-3 mt-1">
+<i class="ri-check-line"></i>
+</div>
+<span>Full hands and feet design</span>
+</li>
+<li class="flex items-start">
+<div class="w-6 h-6 flex items-center justify-center text-primary mr-3 mt-1">
+<i class="ri-check-line"></i>
+</div>
+<span>Personalized consultation</span>
+</li>
+<li class="flex items-start">
+<div class="w-6 h-6 flex items-center justify-center text-primary mr-3 mt-1">
+<i class="ri-check-line"></i>
+</div>
+<span>Premium organic henna</span>
+</li>
+<li class="flex items-start">
+<div class="w-6 h-6 flex items-center justify-center text-primary mr-3 mt-1">
+<i class="ri-check-line"></i>
+</div>
+<span>Touch-up kit included</span>
+</li>
+</ul>
+<div class="flex justify-between items-center">
+<span class="text-2xl font-bold text-primary">৳15,000</span>
+<a href="#booking" class="bg-primary text-white px-6 py-2 rounded-button font-medium hover:bg-opacity-90 transition-colors whitespace-nowrap">Book Now</a>
+</div>
+</div>
+</div>
+<!-- Service Card 2 -->
+<div class="service-card bg-white rounded-xl shadow-lg overflow-hidden">
+<div class="h-48 bg-primary flex items-center justify-center">
+<img src="https://readdy.ai/api/search-image?query=special%20event%20henna%20application%2C%20celebration%20henna%20session%2C%20professional%20photography%2C%20soft%20lighting%2C%20festive%20henna%20experience&width=600&height=400&seq=service2&orientation=landscape" alt="Event Henna Service" class="w-full h-full object-cover">
+</div>
+<div class="p-8">
+<h3 class="text-2xl font-bold text-primary mb-4">Event Package</h3>
+<ul class="space-y-3 mb-6">
+<li class="flex items-start">
+<div class="w-6 h-6 flex items-center justify-center text-primary mr-3 mt-1">
+<i class="ri-check-line"></i>
+</div>
+<span>Group bookings available</span>
+</li>
+<li class="flex items-start">
+<div class="w-6 h-6 flex items-center justify-center text-primary mr-3 mt-1">
+<i class="ri-check-line"></i>
+</div>
+<span>Custom designs for guests</span>
+</li>
+<li class="flex items-start">
+<div class="w-6 h-6 flex items-center justify-center text-primary mr-3 mt-1">
+<i class="ri-check-line"></i>
+</div>
+<span>On-site service available</span>
+</li>
+<li class="flex items-start">
+<div class="w-6 h-6 flex items-center justify-center text-primary mr-3 mt-1">
+<i class="ri-check-line"></i>
+</div>
+<span>Hourly or full-day options</span>
+</li>
+</ul>
+<div class="flex justify-between items-center">
+<span class="text-2xl font-bold text-primary">৳8,000</span>
+<a href="#booking" class="bg-primary text-white px-6 py-2 rounded-button font-medium hover:bg-opacity-90 transition-colors whitespace-nowrap">Book Now</a>
+</div>
+</div>
+</div>
+<!-- Service Card 3 -->
+<div class="service-card bg-white rounded-xl shadow-lg overflow-hidden">
+<div class="h-48 bg-primary flex items-center justify-center">
+<img src="https://readdy.ai/api/search-image?query=personal%20henna%20session%2C%20individual%20client%20getting%20henna%20design%2C%20professional%20photography%2C%20soft%20lighting%2C%20intimate%20henna%20experience&width=600&height=400&seq=service3&orientation=landscape" alt="Personal Henna Service" class="w-full h-full object-cover">
+</div>
+<div class="p-8">
+<h3 class="text-2xl font-bold text-primary mb-4">Personal Session</h3>
+<ul class="space-y-3 mb-6">
+<li class="flex items-start">
+<div class="w-6 h-6 flex items-center justify-center text-primary mr-3 mt-1">
+<i class="ri-check-line"></i>
+</div>
+<span>One-on-one consultation</span>
+</li>
+<li class="flex items-start">
+<div class="w-6 h-6 flex items-center justify-center text-primary mr-3 mt-1">
+<i class="ri-check-line"></i>
+</div>
+<span>Custom design creation</span>
+</li>
+<li class="flex items-start">
+<div class="w-6 h-6 flex items-center justify-center text-primary mr-3 mt-1">
+<i class="ri-check-line"></i>
+</div>
+<span>Choice of traditional or modern</span>
+</li>
+<li class="flex items-start">
+<div class="w-6 h-6 flex items-center justify-center text-primary mr-3 mt-1">
+<i class="ri-check-line"></i>
+</div>
+<span>Aftercare instructions</span>
+</li>
+</ul>
+<div class="flex justify-between items-center">
+<span class="text-2xl font-bold text-primary">৳3,500</span>
+<a href="#booking" class="bg-primary text-white px-6 py-2 rounded-button font-medium hover:bg-opacity-90 transition-colors whitespace-nowrap">Book Now</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Testimonials Section -->
+<section id="testimonials" class="py-20">
+<div class="container mx-auto px-6">
+<div class="text-center mb-16">
+<h2 class="text-4xl font-bold text-primary mb-4">Client Testimonials</h2>
+<p class="text-xl text-gray-600 mb-6">What my clients say about their experience</p>
+<div class="w-24 h-1 bg-secondary mx-auto"></div>
+</div>
+<div class="testimonial-slider relative">
+<div class="flex overflow-x-hidden" id="testimonialContainer">
+<!-- Testimonial 1 -->
+<div class="testimonial-card min-w-full md:min-w-[33.333%] px-4">
+<div class="bg-white p-8 rounded-xl shadow-lg h-full">
+<div class="flex items-center mb-6">
+<img src="https://readdy.ai/api/search-image?query=professional%20portrait%20of%20south%20asian%20woman%20in%20her%2020s%2C%20elegant%2C%20smiling%2C%20soft%20lighting%2C%20professional%20photography&width=100&height=100&seq=client1&orientation=squarish" alt="Anika Rahman" class="w-16 h-16 rounded-full object-cover mr-4">
+<div>
+<h4 class="text-lg font-bold">Anika Rahman</h4>
+<p class="text-gray-600">Bridal Client</p>
+</div>
+</div>
+<div class="flex text-secondary mb-4">
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+</div>
+<p class="text-gray-700">"Sadiya created the most beautiful bridal henna for my wedding. Her attention to detail and personalized designs made me feel so special. Everyone was amazed by the intricate patterns and how well they complemented my wedding outfit. Highly recommend!"</p>
+</div>
+</div>
+<!-- Testimonial 2 -->
+<div class="testimonial-card min-w-full md:min-w-[33.333%] px-4">
+<div class="bg-white p-8 rounded-xl shadow-lg h-full">
+<div class="flex items-center mb-6">
+<img src="https://readdy.ai/api/search-image?query=professional%20portrait%20of%20south%20asian%20woman%20in%20her%2030s%2C%20elegant%2C%20smiling%2C%20soft%20lighting%2C%20professional%20photography&width=100&height=100&seq=client2&orientation=squarish" alt="Fariha Jahan" class="w-16 h-16 rounded-full object-cover mr-4">
+<div>
+<h4 class="text-lg font-bold">Fariha Jahan</h4>
+<p class="text-gray-600">Event Client</p>
+</div>
+</div>
+<div class="flex text-secondary mb-4">
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+</div>
+<p class="text-gray-700">"I hired Sadiya for my sister's engagement party, and she was absolutely fantastic! She managed to create beautiful designs for all our guests in a timely manner. Her work is not only stunning but also lasts longer than any other henna I've tried before."</p>
+</div>
+</div>
+<!-- Testimonial 3 -->
+<div class="testimonial-card min-w-full md:min-w-[33.333%] px-4">
+<div class="bg-white p-8 rounded-xl shadow-lg h-full">
+<div class="flex items-center mb-6">
+<img src="https://readdy.ai/api/search-image?query=professional%20portrait%20of%20south%20asian%20woman%20in%20her%2040s%2C%20elegant%2C%20smiling%2C%20soft%20lighting%2C%20professional%20photography&width=100&height=100&seq=client3&orientation=squarish" alt="Nusrat Alam" class="w-16 h-16 rounded-full object-cover mr-4">
+<div>
+<h4 class="text-lg font-bold">Nusrat Alam</h4>
+<p class="text-gray-600">Personal Session</p>
+</div>
+</div>
+<div class="flex text-secondary mb-4">
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-half-fill"></i>
+</div>
+<p class="text-gray-700">"I wanted something special for Eid celebration and Sadiya delivered beyond my expectations. She took the time to understand what I wanted and created a design that perfectly matched my style. The quality of her henna paste is exceptional - rich color and long-lasting."</p>
+</div>
+</div>
+<!-- Testimonial 4 -->
+<div class="testimonial-card min-w-full md:min-w-[33.333%] px-4">
+<div class="bg-white p-8 rounded-xl shadow-lg h-full">
+<div class="flex items-center mb-6">
+<img src="https://readdy.ai/api/search-image?query=professional%20portrait%20of%20south%20asian%20woman%20in%20her%2020s%2C%20elegant%2C%20smiling%2C%20soft%20lighting%2C%20professional%20photography&width=100&height=100&seq=client4&orientation=squarish" alt="Tasnim Haque" class="w-16 h-16 rounded-full object-cover mr-4">
+<div>
+<h4 class="text-lg font-bold">Tasnim Haque</h4>
+<p class="text-gray-600">Bridal Client</p>
+</div>
+</div>
+<div class="flex text-secondary mb-4">
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+</div>
+<p class="text-gray-700">"Sadiya is an absolute artist! Her bridal henna designs were the highlight of my wedding preparations. She was patient, professional, and created exactly what I envisioned. The color was deep and rich, and lasted throughout my wedding festivities."</p>
+</div>
+</div>
+</div>
+<!-- Slider Controls -->
+<div class="flex justify-center mt-8 gap-4">
+<button id="prevTestimonial" class="w-12 h-12 rounded-full border border-primary text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
+<i class="ri-arrow-left-s-line ri-lg"></i>
+</button>
+<button id="nextTestimonial" class="w-12 h-12 rounded-full border border-primary text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
+<i class="ri-arrow-right-s-line ri-lg"></i>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Booking Section -->
+<section id="booking" class="py-20 bg-gray-50">
+<div class="container mx-auto px-6">
+<div class="text-center mb-16">
+<h2 class="text-4xl font-bold text-primary mb-4">Book Your Session</h2>
+<p class="text-xl text-gray-600 mb-6">Reserve your spot for a personalized henna experience</p>
+<div class="w-24 h-1 bg-secondary mx-auto"></div>
+</div>
+<div class="flex flex-col lg:flex-row gap-12">
+<div class="w-full lg:w-1/2">
+<form id="bookingForm" class="bg-white p-8 rounded-xl shadow-lg">
+<div class="mb-6">
+<label for="name" class="block text-gray-700 font-medium mb-2">Full Name</label>
+<input type="text" id="name" class="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:border-primary" placeholder="Your name" required>
+</div>
+<div class="mb-6">
+<label for="email" class="block text-gray-700 font-medium mb-2">Email Address</label>
+<input type="email" id="email" class="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:border-primary" placeholder="Your email" required>
+</div>
+<div class="mb-6">
+<label for="phone" class="block text-gray-700 font-medium mb-2">Phone Number</label>
+<input type="tel" id="phone" class="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:border-primary" placeholder="Your phone number" required>
+</div>
+<div class="mb-6">
+<label for="service" class="block text-gray-700 font-medium mb-2">Service Type</label>
+<div class="relative">
+<select id="service" class="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:border-primary appearance-none pr-8">
+<option value="" disabled selected>Select a service</option>
+<option value="bridal">Bridal Package</option>
+<option value="event">Event Package</option>
+<option value="personal">Personal Session</option>
+<option value="custom">Custom Design</option>
+</select>
+<div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none text-gray-500">
+<i class="ri-arrow-down-s-line"></i>
+</div>
+</div>
+</div>
+<div class="mb-6">
+<label for="date" class="block text-gray-700 font-medium mb-2">Preferred Date</label>
+<input type="date" id="date" class="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:border-primary" required>
+</div>
+<div class="mb-6">
+<label for="message" class="block text-gray-700 font-medium mb-2">Special Requests</label>
+<textarea id="message" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:border-primary" placeholder="Tell me about your design preferences or any special requests"></textarea>
+</div>
+<div class="mb-6 flex items-start">
+<input type="checkbox" id="terms" class="mr-3 mt-1" required>
+<label for="terms" class="text-gray-700">I agree to the <a href="#" class="text-primary hover:underline">terms and conditions</a></label>
+</div>
+<button type="submit" class="w-full bg-primary text-white py-3 rounded-button text-lg font-medium hover:bg-opacity-90 transition-colors whitespace-nowrap">Submit Booking Request</button>
+</form>
+</div>
+<div class="w-full lg:w-1/2">
+<div class="bg-white p-8 rounded-xl shadow-lg mb-8">
+<h3 class="text-2xl font-bold text-primary mb-6">Contact Information</h3>
+<div class="space-y-4">
+<div class="flex items-start">
+<div class="w-10 h-10 flex items-center justify-center text-primary mr-4 mt-1 bg-primary bg-opacity-10 rounded-full">
+<i class="ri-map-pin-line"></i>
+</div>
+<div>
+<h4 class="font-medium text-gray-800">Studio Location</h4>
+<p class="text-gray-600">Salna, Gazipur, Bangladesh</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="w-10 h-10 flex items-center justify-center text-primary mr-4 mt-1 bg-primary bg-opacity-10 rounded-full">
+<i class="ri-phone-line"></i>
+</div>
+<div>
+<h4 class="font-medium text-gray-800">Phone</h4>
+<p class="text-gray-600">+880 1712 345678</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="w-10 h-10 flex items-center justify-center text-primary mr-4 mt-1 bg-primary bg-opacity-10 rounded-full">
+<i class="ri-mail-line"></i>
+</div>
+<div>
+<h4 class="font-medium text-gray-800">Email</h4>
+<p class="text-gray-600">sadiya@mystichands.com</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="w-10 h-10 flex items-center justify-center text-primary mr-4 mt-1 bg-primary bg-opacity-10 rounded-full">
+<i class="ri-time-line"></i>
+</div>
+<div>
+<h4 class="font-medium text-gray-800">Working Hours</h4>
+<p class="text-gray-600">Tuesday - Sunday: 10:00 AM - 7:00 PM</p>
+<p class="text-gray-600">Monday: Closed</p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white p-8 rounded-xl shadow-lg">
+<h3 class="text-2xl font-bold text-primary mb-6">Find Us</h3>
+<div class="rounded-lg overflow-hidden h-64 bg-gray-200">
+<div class="w-full h-full" style="background-image: url('https://public.readdy.ai/gen_page/map_placeholder_1280x720.png'); background-size: cover; background-position: center;"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Signature Designs Section -->
+<section class="py-20 bg-white">
+<div class="container mx-auto px-6">
+<div class="text-center mb-16">
+<h2 class="text-4xl font-bold text-primary mb-4">Signature Designs</h2>
+<p class="text-xl text-gray-600 mb-6">Exclusive patterns crafted with passion and precision</p>
+<div class="w-24 h-1 bg-secondary mx-auto"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="group relative overflow-hidden rounded-xl shadow-lg">
+<img src="https://readdy.ai/api/search-image?query=close%20up%20of%20intricate%20luxury%20bridal%20henna%20design%20on%20hands%2C%20professional%20studio%20lighting%2C%20high-end%20photography%2C%20detailed%20mehndi%20art%20with%20premium%20quality&width=600&height=800&seq=signature1&orientation=portrait" alt="Signature Design 1" class="w-full h-96 object-cover transition-transform duration-500 group-hover:scale-110">
+<div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-6 translate-y-4 group-hover:translate-y-0 transition-transform">
+<h3 class="text-white text-2xl font-bold mb-2">Royal Bridal Collection</h3>
+<p class="text-white/90">Exquisite patterns inspired by Mughal architecture</p>
+</div>
+</div>
+<div class="group relative overflow-hidden rounded-xl shadow-lg">
+<img src="https://readdy.ai/api/search-image?query=elegant%20modern%20minimalist%20henna%20design%20on%20hands%2C%20contemporary%20pattern%2C%20professional%20studio%20lighting%2C%20artistic%20mehndi%20photography&width=600&height=800&seq=signature2&orientation=portrait" alt="Signature Design 2" class="w-full h-96 object-cover transition-transform duration-500 group-hover:scale-110">
+<div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-6 translate-y-4 group-hover:translate-y-0 transition-transform">
+<h3 class="text-white text-2xl font-bold mb-2">Modern Minimalist</h3>
+<p class="text-white/90">Contemporary designs for the modern bride</p>
+</div>
+</div>
+<div class="group relative overflow-hidden rounded-xl shadow-lg">
+<img src="https://readdy.ai/api/search-image?query=traditional%20intricate%20henna%20design%20with%20cultural%20motifs%20on%20hands%2C%20heritage%20pattern%2C%20professional%20studio%20lighting%2C%20authentic%20mehndi%20art&width=600&height=800&seq=signature3&orientation=portrait" alt="Signature Design 3" class="w-full h-96 object-cover transition-transform duration-500 group-hover:scale-110">
+<div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-6 translate-y-4 group-hover:translate-y-0 transition-transform">
+<h3 class="text-white text-2xl font-bold mb-2">Heritage Collection</h3>
+<p class="text-white/90">Traditional patterns with a modern twist</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- FAQ Section -->
+<section class="py-20 bg-gray-50">
+<div class="container mx-auto px-6">
+<div class="text-center mb-16">
+<h2 class="text-4xl font-bold text-primary mb-4">Frequently Asked Questions</h2>
+<p class="text-xl text-gray-600 mb-6">Everything you need to know about our henna services</p>
+<div class="w-24 h-1 bg-secondary mx-auto"></div>
+</div>
+<div class="max-w-3xl mx-auto">
+<div class="space-y-6">
+<div class="faq-item bg-white rounded-xl shadow-md overflow-hidden">
+<button class="faq-button w-full px-6 py-4 text-left flex items-center justify-between focus:outline-none">
+<span class="text-lg font-medium">How long does the henna stain last?</span>
+<i class="ri-add-line text-primary transition-transform"></i>
+</button>
+<div class="faq-answer px-6 py-4 border-t border-gray-100 hidden">
+<p class="text-gray-600">The henna stain typically lasts 1-3 weeks, depending on various factors including skin type, care routine, and the area where it's applied. With proper aftercare, you can maintain a rich color for longer.</p>
+</div>
+</div>
+<div class="faq-item bg-white rounded-xl shadow-md overflow-hidden">
+<button class="faq-button w-full px-6 py-4 text-left flex items-center justify-between focus:outline-none">
+<span class="text-lg font-medium">What type of henna do you use?</span>
+<i class="ri-add-line text-primary transition-transform"></i>
+</button>
+<div class="faq-answer px-6 py-4 border-t border-gray-100 hidden">
+<p class="text-gray-600">We use 100% natural, organic henna powder imported from Rajasthan, India. Our henna paste is freshly mixed with essential oils and natural ingredients to ensure the darkest possible stain and longest-lasting results.</p>
+</div>
+</div>
+<div class="faq-item bg-white rounded-xl shadow-md overflow-hidden">
+<button class="faq-button w-full px-6 py-4 text-left flex items-center justify-between focus:outline-none">
+<span class="text-lg font-medium">How far in advance should I book for bridal henna?</span>
+<i class="ri-add-line text-primary transition-transform"></i>
+</button>
+<div class="faq-answer px-6 py-4 border-t border-gray-100 hidden">
+<p class="text-gray-600">For bridal henna, we recommend booking at least 2-3 months in advance to secure your preferred date. Peak wedding seasons may require earlier bookings. We also offer priority booking for bridal packages.</p>
+</div>
+</div>
+<div class="faq-item bg-white rounded-xl shadow-md overflow-hidden">
+<button class="faq-button w-full px-6 py-4 text-left flex items-center justify-between focus:outline-none">
+<span class="text-lg font-medium">Do you offer henna design consultations?</span>
+<i class="ri-add-line text-primary transition-transform"></i>
+</button>
+<div class="faq-answer px-6 py-4 border-t border-gray-100 hidden">
+<p class="text-gray-600">Yes, we offer complimentary design consultations for bridal clients. For other services, we can schedule a paid consultation to discuss your design preferences and create a custom pattern that matches your style.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- WhatsApp Button -->
+<a href="https://wa.me/8801712345678" class="whatsapp-button w-16 h-16 bg-green-500 rounded-full flex items-center justify-center shadow-lg hover:bg-green-600 transition-colors">
+<i class="ri-whatsapp-line text-white ri-2x"></i>
+</a>
+<!-- Footer -->
+<footer class="bg-gray-900 text-white py-16">
+<div class="container mx-auto px-6">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+<div>
+<a href="#" class="logo text-secondary text-3xl font-bold mb-6 block">Mystic Hands</a>
+<p class="text-gray-400 mb-6">Premium henna art services with over 15 years of experience. Creating beautiful memories one design at a time.</p>
+<div class="flex space-x-4">
+<a href="#" class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-600 text-gray-400 hover:text-secondary hover:border-secondary transition-colors">
+<i class="ri-facebook-fill"></i>
+</a>
+<a href="#" class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-600 text-gray-400 hover:text-secondary hover:border-secondary transition-colors">
+<i class="ri-instagram-line"></i>
+</a>
+<a href="#" class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-600 text-gray-400 hover:text-secondary hover:border-secondary transition-colors">
+<i class="ri-pinterest-line"></i>
+</a>
+<a href="#" class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-600 text-gray-400 hover:text-secondary hover:border-secondary transition-colors">
+<i class="ri-youtube-line"></i>
+</a>
+</div>
+</div>
+<div>
+<h3 class="text-xl font-bold mb-6">Quick Links</h3>
+<ul class="space-y-3">
+<li><a href="#" class="text-gray-400 hover:text-secondary transition-colors">Home</a></li>
+<li><a href="#about" class="text-gray-400 hover:text-secondary transition-colors">About</a></li>
+<li><a href="#gallery" class="text-gray-400 hover:text-secondary transition-colors">Gallery</a></li>
+<li><a href="#testimonials" class="text-gray-400 hover:text-secondary transition-colors">Testimonials</a></li>
+<li><a href="#booking" class="text-gray-400 hover:text-secondary transition-colors">Booking</a></li>
+<li><a href="#" class="text-gray-400 hover:text-secondary transition-colors">Privacy Policy</a></li>
+<li><a href="#" class="text-gray-400 hover:text-secondary transition-colors">Terms of Service</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-xl font-bold mb-6">Newsletter</h3>
+<p class="text-gray-400 mb-6">Subscribe to receive updates on new designs, special offers, and henna care tips.</p>
+<form class="mb-6">
+<div class="flex">
+<input type="email" placeholder="Your email address" class="w-full px-4 py-3 bg-gray-800 border-none rounded-l focus:outline-none focus:ring-2 focus:ring-secondary text-white">
+<button type="submit" class="bg-secondary text-white px-6 py-3 rounded-r hover:bg-opacity-90 transition-colors whitespace-nowrap !rounded-button">Subscribe</button>
+</div>
+</form>
+<div>
+<h4 class="text-lg font-medium mb-4">We Accept</h4>
+<div class="flex space-x-4">
+<div class="w-10 h-10 flex items-center justify-center text-gray-400">
+<i class="ri-visa-fill ri-lg"></i>
+</div>
+<div class="w-10 h-10 flex items-center justify-center text-gray-400">
+<i class="ri-mastercard-fill ri-lg"></i>
+</div>
+<div class="w-10 h-10 flex items-center justify-center text-gray-400">
+<i class="ri-paypal-fill ri-lg"></i>
+</div>
+<div class="w-10 h-10 flex items-center justify-center text-gray-400">
+<i class="ri-bank-card-fill ri-lg"></i>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+<p>&copy; 2025 Mystic Hands by Sadiya. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+// Section Management
+const sections = document.querySelectorAll('section');
+const navLinks = document.querySelectorAll('nav a');
+function showSection(sectionId) {
+sections.forEach(section => {
+section.classList.add('opacity-0', 'pointer-events-none', 'absolute');
+section.classList.remove('opacity-100');
+});
+if(sectionId === '#') {
+document.querySelector('.hero-section').classList.remove('opacity-0', 'pointer-events-none', 'absolute');
+document.querySelector('.hero-section').classList.add('opacity-100');
+sections[0].classList.remove('opacity-0', 'pointer-events-none', 'absolute');
+sections[0].classList.add('opacity-100');
+} else {
+const targetSection = document.querySelector(sectionId);
+if(targetSection) {
+targetSection.classList.remove('opacity-0', 'pointer-events-none', 'absolute');
+targetSection.classList.add('opacity-100');
+}
+}
+}
+// Initialize - show only hero section
+showSection('#');
+// Navigation handling
+navLinks.forEach(link => {
+link.addEventListener('click', (e) => {
+e.preventDefault();
+const sectionId = link.getAttribute('href');
+showSection(sectionId);
+// Update active state
+navLinks.forEach(navLink => navLink.classList.remove('text-primary'));
+link.classList.add('text-primary');
+// Close mobile menu if open
+mobileMenu.classList.add('hidden');
+});
+});
+// Mobile Menu Toggle
+const mobileMenuButton = document.getElementById('mobileMenuButton');
+const mobileMenu = document.getElementById('mobileMenu');
+mobileMenuButton.addEventListener('click', function() {
+mobileMenu.classList.toggle('hidden');
+});
+// Header Scroll Effect
+const header = document.querySelector('header');
+window.addEventListener('scroll', function() {
+if (window.scrollY > 50) {
+header.classList.add('shadow-md');
+header.classList.remove('bg-opacity-95');
+} else {
+header.classList.remove('shadow-md');
+header.classList.add('bg-opacity-95');
+}
+});
+// Enhanced Henna Particle Animation
+const particleContainer = document.getElementById('particles');
+const hennaPatterns = [
+"☘️", "🌸", "✨", "🌿", "💫", "🍃", "⭐", "🌺"
+];
+function createParticle() {
+const particle = document.createElement('div');
+particle.classList.add('particle');
+// Randomly choose between shape or henna pattern
+if(Math.random() > 0.5) {
+const pattern = hennaPatterns[Math.floor(Math.random() * hennaPatterns.length)];
+particle.textContent = pattern;
+particle.style.fontSize = `${Math.random() * 15 + 10}px`;
+particle.style.color = `rgba(139, 69, 19, ${Math.random() * 0.3 + 0.1})`;
+} else {
+const size = Math.random() * 10 + 5;
+particle.style.width = `${size}px`;
+particle.style.height = `${size}px`;
+particle.style.background = `rgba(218, 165, 32, ${Math.random() * 0.3 + 0.1})`;
+particle.style.clipPath = Math.random() > 0.5 ?
+'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)' :
+'polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%)';
+}
+const xPos = Math.random() * 100;
+const yPos = Math.random() * 100;
+particle.style.left = `${xPos}%`;
+particle.style.top = `${yPos}%`;
+const opacity = Math.random() * 0.3 + 0.1;
+particle.style.opacity = opacity;
+const duration = Math.random() * 20 + 10;
+particle.style.animation = `float ${duration}s ease-in-out infinite`;
+particleContainer.appendChild(particle);
+setTimeout(() => {
+particle.remove();
+}, duration * 1000);
+}
+// Create initial particles
+for (let i = 0; i < 20; i++) {
+createParticle();
+}
+// Continue creating particles
+setInterval(createParticle, 1000);
+// Add float animation
+const style = document.createElement('style');
+style.textContent = `
+@keyframes float {
+0% { transform: translate(0, 0) rotate(0deg); }
+25% { transform: translate(10px, 10px) rotate(5deg); }
+50% { transform: translate(0, 20px) rotate(0deg); }
+75% { transform: translate(-10px, 10px) rotate(-5deg); }
+100% { transform: translate(0, 0) rotate(0deg); }
+}
+`;
+document.head.appendChild(style);
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+// Gallery Filter
+const galleryFilters = document.querySelectorAll('.gallery-filter');
+const galleryItems = document.querySelectorAll('.gallery-item');
+galleryFilters.forEach(filter => {
+filter.addEventListener('click', function() {
+// Update active filter
+galleryFilters.forEach(f => {
+f.classList.remove('bg-primary', 'text-white');
+f.classList.add('bg-white', 'border', 'border-primary', 'text-primary');
+});
+this.classList.remove('bg-white', 'border', 'border-primary', 'text-primary');
+this.classList.add('bg-primary', 'text-white');
+const filterValue = this.getAttribute('data-filter');
+galleryItems.forEach(item => {
+if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+item.style.display = 'block';
+} else {
+item.style.display = 'none';
+}
+});
+});
+});
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+// FAQ Accordion
+const faqButtons = document.querySelectorAll('.faq-button');
+faqButtons.forEach(button => {
+button.addEventListener('click', () => {
+const answer = button.nextElementSibling;
+const icon = button.querySelector('i');
+const isOpen = !answer.classList.contains('hidden');
+// Close all other answers
+document.querySelectorAll('.faq-answer').forEach(a => a.classList.add('hidden'));
+document.querySelectorAll('.faq-button i').forEach(i => {
+i.classList.remove('rotate-45');
+i.classList.add('ri-add-line');
+i.classList.remove('ri-close-line');
+});
+if (!isOpen) {
+answer.classList.remove('hidden');
+icon.classList.add('rotate-45');
+icon.classList.remove('ri-add-line');
+icon.classList.add('ri-close-line');
+}
+});
+});
+// Enhanced Testimonial Slider
+const testimonialContainer = document.getElementById('testimonialContainer');
+const testimonials = document.querySelectorAll('.testimonial-card');
+const prevButton = document.getElementById('prevTestimonial');
+const nextButton = document.getElementById('nextTestimonial');
+let currentIndex = 0;
+const slideWidth = 100;
+const totalSlides = testimonials.length;
+const slidesPerView = window.innerWidth >= 768 ? 3 : 1;
+const maxIndex = totalSlides - slidesPerView;
+function updateSlider() {
+testimonialContainer.style.transform = `translateX(-${currentIndex * (slideWidth / slidesPerView)}%)`;
+}
+prevButton.addEventListener('click', function() {
+if (currentIndex > 0) {
+currentIndex--;
+updateSlider();
+}
+});
+nextButton.addEventListener('click', function() {
+if (currentIndex < maxIndex) {
+currentIndex++;
+updateSlider();
+}
+});
+// Auto slide
+let autoSlideInterval = setInterval(function() {
+if (currentIndex < maxIndex) {
+currentIndex++;
+} else {
+currentIndex = 0;
+}
+updateSlider();
+}, 5000);
+// Pause auto slide on hover
+testimonialContainer.addEventListener('mouseenter', function() {
+clearInterval(autoSlideInterval);
+});
+testimonialContainer.addEventListener('mouseleave', function() {
+autoSlideInterval = setInterval(function() {
+if (currentIndex < maxIndex) {
+currentIndex++;
+} else {
+currentIndex = 0;
+}
+updateSlider();
+}, 5000);
+});
+// Update slider on window resize
+window.addEventListener('resize', function() {
+const newSlidesPerView = window.innerWidth >= 768 ? 3 : 1;
+if (newSlidesPerView !== slidesPerView) {
+location.reload();
+}
+});
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+// Booking Form Validation
+const bookingForm = document.getElementById('bookingForm');
+bookingForm.addEventListener('submit', function(e) {
+e.preventDefault();
+const name = document.getElementById('name').value;
+const email = document.getElementById('email').value;
+const phone = document.getElementById('phone').value;
+const service = document.getElementById('service').value;
+const date = document.getElementById('date').value;
+const terms = document.getElementById('terms').checked;
+if (!name || !email || !phone || !service || !date || !terms) {
+alert('Please fill in all required fields');
+return;
+}
+// Email validation
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+if (!emailRegex.test(email)) {
+alert('Please enter a valid email address');
+return;
+}
+// Phone validation
+const phoneRegex = /^\+?[0-9]{10,15}$/;
+if (!phoneRegex.test(phone.replace(/\s/g, ''))) {
+alert('Please enter a valid phone number');
+return;
+}
+// Date validation
+const selectedDate = new Date(date);
+const today = new Date();
+if (selectedDate <= today) {
+alert('Please select a future date');
+return;
+}
+// If all validations pass
+alert('Thank you for your booking request! We will contact you shortly to confirm your appointment.');
+bookingForm.reset();
+});
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+// Dark Mode Toggle
+const darkModeToggle = document.getElementById('darkModeToggle');
+const body = document.body;
+const darkModeIcon = darkModeToggle.querySelector('i');
+// Check for saved theme preference
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'dark') {
+body.classList.add('dark-mode');
+darkModeIcon.classList.remove('ri-sun-line');
+darkModeIcon.classList.add('ri-moon-line');
+darkModeToggle.classList.remove('bg-gray-100');
+darkModeToggle.classList.add('bg-gray-700', 'text-white');
+}
+darkModeToggle.addEventListener('click', function() {
+const isDarkMode = body.classList.toggle('dark-mode');
+if (isDarkMode) {
+darkModeIcon.classList.remove('ri-sun-line');
+darkModeIcon.classList.add('ri-moon-line');
+darkModeToggle.classList.remove('bg-gray-100');
+darkModeToggle.classList.add('bg-gray-700', 'text-white');
+localStorage.setItem('theme', 'dark');
+} else {
+darkModeIcon.classList.remove('ri-moon-line');
+darkModeIcon.classList.add('ri-sun-line');
+darkModeToggle.classList.remove('bg-gray-700', 'text-white');
+darkModeToggle.classList.add('bg-gray-100');
+localStorage.setItem('theme', 'light');
+}
+});
+// Smooth Scroll for Navigation Links
+const navLinks = document.querySelectorAll('a[href^="#"]');
+navLinks.forEach(link => {
+link.addEventListener('click', function(e) {
+// Only if the href is not just "#"
+if (this.getAttribute('href') !== '#') {
+e.preventDefault();
+const targetId = this.getAttribute('href');
+const targetElement = document.querySelector(targetId);
+if (targetElement) {
+// Close mobile menu if open
+const mobileMenu = document.getElementById('mobileMenu');
+if (!mobileMenu.classList.contains('hidden')) {
+mobileMenu.classList.add('hidden');
+}
+// Scroll to the target
+window.scrollTo({
+top: targetElement.offsetTop - 100,
+behavior: 'smooth'
+});
+}
+}
+});
+});
+});
+</script>
 </body>
 </html>
