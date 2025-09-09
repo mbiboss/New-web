@@ -30,6 +30,93 @@
     --transition: all 0.3s ease;
   }
 
+  /* Theme Definitions */
+  .theme-light {
+    --bg: #f8f9fa;
+    --bg-gradient: linear-gradient(to bottom, #e3f2fd, #bbdefb, #90caf9);
+    --card: rgba(0, 0, 0, 0.05);
+    --accent: #1976d2;
+    --accent-hover: #1565c0;
+    --text: #212121;
+    --text-secondary: rgba(0, 0, 0, 0.6);
+    --glass: rgba(0, 0, 0, 0.03);
+    --glass-border: rgba(0, 0, 0, 0.1);
+    --progress-bg: rgba(0, 0, 0, 0.1);
+    --chip-bg: rgba(25, 118, 210, 0.15);
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .theme-ocean {
+    --bg: #0a1929;
+    --bg-gradient: linear-gradient(to bottom, #1e3a8a, #1e40af, #0a1929);
+    --card: rgba(59, 130, 246, 0.05);
+    --accent: #3b82f6;
+    --accent-hover: #2563eb;
+    --text: #e0f2fe;
+    --text-secondary: rgba(224, 242, 254, 0.7);
+    --glass: rgba(59, 130, 246, 0.05);
+    --glass-border: rgba(59, 130, 246, 0.1);
+    --progress-bg: rgba(59, 130, 246, 0.1);
+    --chip-bg: rgba(59, 130, 246, 0.15);
+  }
+
+  .theme-forest {
+    --bg: #1a2e05;
+    --bg-gradient: linear-gradient(to bottom, #2e7d32, #388e3c, #1a2e05);
+    --card: rgba(76, 175, 80, 0.05);
+    --accent: #4caf50;
+    --accent-hover: #43a047;
+    --text: #e8f5e8;
+    --text-secondary: rgba(232, 245, 232, 0.7);
+    --glass: rgba(76, 175, 80, 0.05);
+    --glass-border: rgba(76, 175, 80, 0.1);
+    --progress-bg: rgba(76, 175, 80, 0.1);
+    --chip-bg: rgba(76, 175, 80, 0.15);
+  }
+
+  .theme-sunset {
+    --bg: #3e2723;
+    --bg-gradient: linear-gradient(to bottom, #ff5722, #ff7043, #3e2723);
+    --card: rgba(255, 87, 34, 0.05);
+    --accent: #ff5722;
+    --accent-hover: #f4511e;
+    --text: #fff3e0;
+    --text-secondary: rgba(255, 243, 224, 0.7);
+    --glass: rgba(255, 87, 34, 0.05);
+    --glass-border: rgba(255, 87, 34, 0.1);
+    --progress-bg: rgba(255, 87, 34, 0.1);
+    --chip-bg: rgba(255, 87, 34, 0.15);
+  }
+
+  .theme-neon {
+    --bg: #000000;
+    --bg-gradient: linear-gradient(to bottom, #1a1a2e, #16213e, #000000);
+    --card: rgba(0, 255, 255, 0.05);
+    --accent: #00ffff;
+    --accent-hover: #00e6e6;
+    --text: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.8);
+    --glass: rgba(0, 255, 255, 0.05);
+    --glass-border: rgba(0, 255, 255, 0.2);
+    --progress-bg: rgba(0, 255, 255, 0.1);
+    --chip-bg: rgba(0, 255, 255, 0.15);
+    --shadow: 0 10px 30px rgba(0, 255, 255, 0.3);
+  }
+
+  .theme-rose {
+    --bg: #1a0e1a;
+    --bg-gradient: linear-gradient(to bottom, #ad1457, #c2185b, #1a0e1a);
+    --card: rgba(233, 30, 99, 0.05);
+    --accent: #e91e63;
+    --accent-hover: #d81b60;
+    --text: #fce4ec;
+    --text-secondary: rgba(252, 228, 236, 0.7);
+    --glass: rgba(233, 30, 99, 0.05);
+    --glass-border: rgba(233, 30, 99, 0.1);
+    --progress-bg: rgba(233, 30, 99, 0.1);
+    --chip-bg: rgba(233, 30, 99, 0.15);
+  }
+
   * {
     box-sizing: border-box;
   }
@@ -46,13 +133,14 @@
   body {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     padding: 20px;
+    min-height: 100vh;
   }
 
   .wrap {
     width: 100%;
-    max-width: 800px;
+    max-width: 1200px;
     background: var(--card);
     backdrop-filter: blur(10px);
     border-radius: 20px;
@@ -387,21 +475,136 @@
     100% { opacity: 1; }
   }
 
-  @media (max-width: 768px) {
+  /* Desktop and Ultra-wide Screens */
+  @media (min-width: 1440px) {
+    .wrap {
+      max-width: 1400px;
+      padding: 40px;
+    }
+    
+    .player-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      align-items: start;
+    }
+    
+    .thumbnail-container {
+      height: 300px;
+    }
+    
+    .search-results {
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      max-height: 500px;
+    }
+    
+    .chips {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+    }
+    
+    .queue-container {
+      max-height: 300px;
+      overflow-y: auto;
+    }
+  }
+
+  /* Large Desktop Screens */
+  @media (min-width: 1024px) and (max-width: 1439px) {
+    .wrap {
+      max-width: 1200px;
+      padding: 35px;
+    }
+    
+    .search-results {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      max-height: 450px;
+    }
+    
+    .thumbnail-container {
+      height: 250px;
+    }
+    
+    .controls {
+      gap: 20px;
+    }
+    
+    .chips {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 10px;
+    }
+  }
+
+  /* Standard Desktop/Laptop Screens */
+  @media (min-width: 769px) and (max-width: 1023px) {
+    .wrap {
+      max-width: 900px;
+      padding: 30px;
+    }
+    
+    .thumbnail-container {
+      height: 220px;
+    }
+    
+    .search-results {
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      max-height: 400px;
+    }
+  }
+
+  /* Tablet Screens */
+  @media (min-width: 481px) and (max-width: 768px) {
     body {
       padding: 15px;
+    }
+    
+    .wrap {
+      max-width: 100%;
+      padding: 25px;
+    }
+    
+    .thumbnail-container {
+      height: 200px;
+    }
+    
+    .search-results {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      max-height: 350px;
+    }
+    
+    .controls {
+      justify-content: center;
+      gap: 15px;
+    }
+    
+    .volume-container {
+      margin-left: 0;
+    }
+    
+    .input-group, .search-group {
+      flex-direction: column;
+    }
+  }
+
+  /* Mobile Screens */
+  @media (max-width: 480px) {
+    body {
+      padding: 10px;
       align-items: flex-start;
     }
     
     .wrap {
       padding: 20px;
+      border-radius: 15px;
     }
     
     h1 {
       font-size: 24px;
     }
     
-    .input-group {
+    .input-group, .search-group {
       flex-direction: column;
     }
     
@@ -411,10 +614,79 @@
     
     .controls {
       justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
     }
     
     .volume-container {
-      display: none;
+      order: 1;
+      margin-left: 0;
+      width: 100%;
+      justify-content: center;
+      margin-top: 10px;
+    }
+    
+    .control-button {
+      width: 40px;
+      height: 40px;
+      font-size: 14px;
+    }
+    
+    .play-button {
+      width: 55px;
+      height: 55px;
+      font-size: 18px;
+    }
+    
+    .search-results {
+      grid-template-columns: 1fr;
+      max-height: 300px;
+    }
+    
+    .chips {
+      gap: 8px;
+    }
+    
+    .chip {
+      font-size: 13px;
+      padding: 8px 14px;
+    }
+  }
+
+  /* Landscape Mobile Optimization */
+  @media (max-height: 500px) and (orientation: landscape) {
+    body {
+      padding: 10px;
+    }
+    
+    .wrap {
+      padding: 15px;
+    }
+    
+    .app-header {
+      margin-bottom: 15px;
+    }
+    
+    h1 {
+      font-size: 20px;
+      margin-bottom: 5px;
+    }
+    
+    .thumbnail-container {
+      height: 120px;
+    }
+    
+    .search-results {
+      max-height: 200px;
+    }
+    
+    .chips {
+      margin-bottom: 15px;
+    }
+    
+    .queue-container, #favorites, #recentlyPlayed {
+      max-height: 150px;
+      overflow-y: auto;
     }
   }
 
@@ -432,6 +704,178 @@
   @keyframes spin {
     to { transform: rotate(360deg); }
   }
+
+  /* Search Section Styles */
+  .search-section {
+    margin-bottom: 25px;
+  }
+
+  .search-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+
+  .search-tab {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 12px;
+    background: var(--glass);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 14px;
+    border: 1px solid var(--glass-border);
+  }
+
+  .search-tab.active {
+    background: var(--accent);
+    color: white;
+    transform: translateY(-2px);
+  }
+
+  .search-tab:hover:not(.active) {
+    background: rgba(110, 68, 255, 0.15);
+    color: var(--text);
+  }
+
+  .search-group {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  #searchInput {
+    flex: 1;
+    padding: 16px 20px;
+    border-radius: 12px;
+    border: 1px solid var(--glass-border);
+    background: var(--glass);
+    color: var(--text);
+    font-size: 16px;
+    transition: var(--transition);
+  }
+
+  #searchInput:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(110, 68, 255, 0.3);
+  }
+
+  #searchBtn {
+    padding: 16px 24px;
+    border-radius: 12px;
+    border: none;
+    background: var(--accent);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  #searchBtn:hover {
+    background: var(--accent-hover);
+    transform: translateY(-2px);
+  }
+
+  .search-results {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 15px;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+
+  .search-result {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 15px;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .search-result:hover {
+    background: rgba(110, 68, 255, 0.15);
+    transform: translateY(-2px);
+    border-color: var(--accent);
+  }
+
+  .search-result-thumb {
+    width: 60px;
+    height: 45px;
+    border-radius: 8px;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .search-result-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .search-result-title {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .search-result-channel {
+    font-size: 12px;
+    color: var(--text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .search-result-duration {
+    font-size: 11px;
+    color: var(--text-secondary);
+    background: rgba(0, 0, 0, 0.3);
+    padding: 2px 6px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  .search-loading {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-secondary);
+  }
+
+  .search-empty {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-secondary);
+  }
+
+  @media (max-width: 768px) {
+    .search-tabs {
+      flex-direction: column;
+    }
+    
+    .search-group {
+      flex-direction: column;
+    }
+    
+    .search-results {
+      grid-template-columns: 1fr;
+    }
+    
+    .search-result {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
 </style>
 </head>
 <body>
@@ -441,16 +885,63 @@
       <p class="note">Convert YouTube videos to audio. Paste a link or choose from suggestions, then press Load and Play.</p>
     </div>
 
-    <div class="input-group">
-      <input id="urlInput" type="text" placeholder="Paste YouTube URL or ID here" inputmode="url" />
-      <button id="loadBtn">
-        <i class="fas fa-play"></i> Load
-      </button>
-      <button id="downloadBtn" style="padding: 16px 20px; border-radius: 12px; border: none; background: var(--success); color: white; font-weight: 600; cursor: pointer; transition: var(--transition); display: flex; align-items: center; gap: 8px;">
-        <i class="fas fa-download"></i> Download
-      </button>
+    <!-- Search Section -->
+    <div class="search-section">
+      <div class="search-tabs">
+        <button class="search-tab active" id="searchTab">🔍 Search Songs</button>
+        <button class="search-tab" id="urlTab">🔗 YouTube URL</button>
+      </div>
+      
+      <div class="search-content" id="searchContent">
+        <div class="search-group">
+          <input id="searchInput" type="text" placeholder="Search for songs, artists, or albums..." />
+          <button id="searchBtn">
+            <i class="fas fa-search"></i> Search
+          </button>
+        </div>
+        <div class="search-results" id="searchResults"></div>
+      </div>
+      
+      <div class="url-content" id="urlContent" style="display: none;">
+        <div class="input-group">
+          <input id="urlInput" type="text" placeholder="Paste YouTube URL or ID here" inputmode="url" />
+          <button id="loadBtn">
+            <i class="fas fa-play"></i> Load
+          </button>
+          <button id="downloadBtn" style="padding: 16px 20px; border-radius: 12px; border: none; background: var(--success); color: white; font-weight: 600; cursor: pointer; transition: var(--transition); display: flex; align-items: center; gap: 8px;">
+            <i class="fas fa-download"></i> Download
+          </button>
+        </div>
+      </div>
     </div>
 
+    <!-- Song Queue Section -->
+    <div class="section-title" id="queueTitle" style="display: none;">
+      🎵 Queue
+      <button id="clearQueue" style="margin-left: 10px; padding: 5px 10px; border: none; background: var(--error); color: white; border-radius: 5px; cursor: pointer; font-size: 12px;">
+        <i class="fas fa-trash"></i> Clear
+      </button>
+    </div>
+    <div class="queue-container" id="queue" style="margin-bottom: 20px;"></div>
+    
+    <!-- Favorites Section -->
+    <div class="section-title" id="favoritesTitle" style="display: none;">
+      ❤️ My Favorites
+      <button id="clearFavorites" style="margin-left: 10px; padding: 5px 10px; border: none; background: var(--error); color: white; border-radius: 5px; cursor: pointer; font-size: 12px;">
+        <i class="fas fa-heart-broken"></i> Clear
+      </button>
+    </div>
+    <div class="chips" id="favorites" style="margin-bottom: 20px;"></div>
+    
+    <!-- Recently Played Section -->
+    <div class="section-title" id="recentlyPlayedTitle" style="display: none;">
+      🕒 Recently Played
+      <button id="clearHistory" style="margin-left: 10px; padding: 5px 10px; border: none; background: var(--error); color: white; border-radius: 5px; cursor: pointer; font-size: 12px;">
+        <i class="fas fa-trash"></i> Clear
+      </button>
+    </div>
+    <div class="chips" id="recentlyPlayed" style="margin-bottom: 20px;"></div>
+    
     <div class="section-title">
       Popular Songs 
       <button id="refreshSuggestions" style="margin-left: 10px; padding: 5px 10px; border: none; background: var(--accent); color: white; border-radius: 5px; cursor: pointer; font-size: 12px;">
@@ -486,6 +977,12 @@
         </div>
 
         <div class="controls">
+          <button class="control-button" id="shuffleBtn" title="Shuffle">
+            <i class="fas fa-random"></i>
+          </button>
+          <button class="control-button" id="favoriteBtn" title="Add to Favorites">
+            <i class="far fa-heart"></i>
+          </button>
           <button class="control-button" id="prevBtn">
             <i class="fas fa-step-backward"></i>
           </button>
@@ -494,6 +991,13 @@
           </button>
           <button class="control-button" id="nextBtn">
             <i class="fas fa-step-forward"></i>
+          </button>
+          <button class="control-button" id="repeatBtn" title="Repeat: Off">
+            <i class="fas fa-redo"></i>
+          </button>
+          
+          <button class="control-button" id="speedBtn" title="Playback Speed: 1x">
+            <span class="speed-text">1x</span>
           </button>
           
           <div class="volume-container">
@@ -508,6 +1012,14 @@
       <div class="status">
         <div class="status-dot ready" id="statusDot"></div>
         <div class="status-text" id="status">Ready - paste a link or select a song</div>
+      </div>
+      <div class="theme-controls">
+        <button class="theme-btn" onclick="showThemeSelector()" title="Change Theme">
+          <i class="fas fa-palette"></i>
+        </button>
+        <button class="keyboard-help-btn" onclick="showKeyboardHelp()" title="Keyboard Shortcuts">
+          <i class="fas fa-keyboard"></i>
+        </button>
       </div>
     </div>
   </div>
@@ -557,6 +1069,28 @@
   const timeDurEl = document.getElementById('timeDur');
   const songTitleEl = document.getElementById('songTitle');
   const songChannelEl = document.getElementById('songChannel');
+  
+  // Search elements
+  const searchTab = document.getElementById('searchTab');
+  const urlTab = document.getElementById('urlTab');
+  const searchContent = document.getElementById('searchContent');
+  const urlContent = document.getElementById('urlContent');
+  const searchInput = document.getElementById('searchInput');
+  const searchBtn = document.getElementById('searchBtn');
+  const searchResults = document.getElementById('searchResults');
+  const recentlyPlayedEl = document.getElementById('recentlyPlayed');
+  const recentlyPlayedTitle = document.getElementById('recentlyPlayedTitle');
+  const clearHistoryBtn = document.getElementById('clearHistory');
+  const favoritesEl = document.getElementById('favorites');
+  const favoritesTitle = document.getElementById('favoritesTitle');
+  const clearFavoritesBtn = document.getElementById('clearFavorites');
+  const favoriteBtn = document.getElementById('favoriteBtn');
+  const shuffleBtn = document.getElementById('shuffleBtn');
+  const repeatBtn = document.getElementById('repeatBtn');
+  const speedBtn = document.getElementById('speedBtn');
+  const queueEl = document.getElementById('queue');
+  const queueTitle = document.getElementById('queueTitle');
+  const clearQueueBtn = document.getElementById('clearQueue');
 
   // Player state vars
   let player = null;
@@ -568,6 +1102,32 @@
   let progressTimer = null;
   let isPlaying = false;
   let currentSuggestionIndex = 0;
+  let searchCache = new Map();
+  let searchTimeout = null;
+  let recentlyPlayedSongs = [];
+  const MAX_RECENT_SONGS = 10;
+  let keyboardShortcutsEnabled = true;
+  let currentTheme = 'default';
+  let favoriteSongs = [];
+  const MAX_FAVORITES = 20;
+  let repeatMode = 'none'; // 'none', 'one', 'all'
+  let shuffleMode = false;
+  let currentPlaylist = [];
+  let currentPlaylistIndex = 0;
+  let playbackSpeed = 1;
+  const availableSpeeds = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2];
+  let songQueue = [];
+  const MAX_QUEUE_SIZE = 50;
+  
+  const themes = {
+    default: { name: '🌆 Purple Galaxy', class: '' },
+    light: { name: '☁️ Light Sky', class: 'theme-light' },
+    ocean: { name: '🌊 Ocean Blue', class: 'theme-ocean' },
+    forest: { name: '🌲 Forest Green', class: 'theme-forest' },
+    sunset: { name: '🌅 Sunset Orange', class: 'theme-sunset' },
+    neon: { name: '🔆 Neon Cyber', class: 'theme-neon' },
+    rose: { name: '🌹 Rose Pink', class: 'theme-rose' }
+  };
 
   // Helpers
   function extractVideoID(input) {
@@ -611,6 +1171,141 @@
     }
   }
 
+  // Search functionality
+  function performSearch(query) {
+    if (!query.trim()) {
+      searchResults.innerHTML = '<div class="search-empty">Enter a search term to find songs</div>';
+      return;
+    }
+    
+    // Check cache first
+    if (searchCache.has(query)) {
+      displaySearchResults(searchCache.get(query));
+      return;
+    }
+    
+    searchResults.innerHTML = '<div class="search-loading"><div class="loader"></div> Searching for songs...</div>';
+    
+    // Simulated search results (in a real app, you'd call YouTube API)
+    const mockResults = [
+      {
+        id: "dQw4w9WgXcQ",
+        title: "Rick Astley - Never Gonna Give You Up",
+        channel: "Rick Astley",
+        thumbnail: `https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg`,
+        duration: "3:33"
+      },
+      {
+        id: "9bZkp7q19f0",
+        title: "PSY - GANGNAM STYLE",
+        channel: "officialpsy",
+        thumbnail: `https://i.ytimg.com/vi/9bZkp7q19f0/hqdefault.jpg`,
+        duration: "4:12"
+      },
+      {
+        id: "kJQP7kiw5Fk",
+        title: "Luis Fonsi - Despacito ft. Daddy Yankee",
+        channel: "Luis Fonsi",
+        thumbnail: `https://i.ytimg.com/vi/kJQP7kiw5Fk/hqdefault.jpg`,
+        duration: "4:42"
+      },
+      {
+        id: "RgKAFK5djSk",
+        title: "Wiz Khalifa - See You Again ft. Charlie Puth",
+        channel: "Wiz Khalifa",
+        thumbnail: `https://i.ytimg.com/vi/RgKAFK5djSk/hqdefault.jpg`,
+        duration: "3:57"
+      },
+      {
+        id: "CevxZvSJLk8",
+        title: "Katy Perry - Roar",
+        channel: "Katy Perry",
+        thumbnail: `https://i.ytimg.com/vi/CevxZvSJLk8/hqdefault.jpg`,
+        duration: "3:43"
+      }
+    ];
+    
+    // Filter results based on query
+    const filteredResults = mockResults.filter(result => 
+      result.title.toLowerCase().includes(query.toLowerCase()) ||
+      result.channel.toLowerCase().includes(query.toLowerCase())
+    );
+    
+    // Cache results
+    searchCache.set(query, filteredResults);
+    
+    // Simulate API delay
+    setTimeout(() => {
+      displaySearchResults(filteredResults);
+    }, 800);
+  }
+  
+  function displaySearchResults(results) {
+    if (results.length === 0) {
+      searchResults.innerHTML = '<div class="search-empty">No songs found. Try a different search term.</div>';
+      return;
+    }
+    
+    const resultsHTML = results.map(result => `
+      <div class="search-result" onclick="loadSong('${result.id}', '${result.title.replace(/'/g, "\\'")  }', '${result.channel.replace(/'/g, "\\'")  }', true)">
+        <img class="search-result-thumb" src="${result.thumbnail}" alt="${result.title}" loading="lazy">
+        <div class="search-result-info">
+          <div class="search-result-title">${result.title}</div>
+          <div class="search-result-channel">${result.channel}</div>
+        </div>
+        <div class="search-result-duration">${result.duration}</div>
+      </div>
+    `).join('');
+    
+    searchResults.innerHTML = resultsHTML;
+  }
+  
+  function loadSong(videoId, title, channel, autoplay = false) {
+    currentVideoId = videoId;
+    currentVideoTitle = title;
+    currentVideoChannel = channel;
+    
+    songTitleEl.textContent = title;
+    songChannelEl.textContent = channel;
+    updateThumbnail(videoId);
+    
+    // Add to recently played (only when actually playing, not just loading)
+    if (autoplay) {
+      addToRecentlyPlayed(videoId, title, channel);
+    }
+    
+    // Update favorite button
+    updateFavoriteButton();
+    
+    // Update playlist
+    if (autoplay) {
+      createPlaylist();
+    }
+    
+    if (ytReady) {
+      createYTPlayer(videoId, autoplay);
+    } else {
+      createFallbackIframe(videoId);
+    }
+    
+    setStatus('Loading song...', 'ready');
+  }
+  
+  // Tab switching
+  function switchToSearchTab() {
+    searchTab.classList.add('active');
+    urlTab.classList.remove('active');
+    searchContent.style.display = 'block';
+    urlContent.style.display = 'none';
+  }
+  
+  function switchToUrlTab() {
+    urlTab.classList.add('active');
+    searchTab.classList.remove('active');
+    urlContent.style.display = 'block';
+    searchContent.style.display = 'none';
+  }
+  
   // Render suggestions
   function renderSuggestions() {
     suggestionsEl.innerHTML = '';
@@ -619,16 +1314,836 @@
       btn.className = 'chip';
       btn.innerHTML = `<i class="fas fa-music"></i> ${s.title}`;
       btn.onclick = () => {
-        urlInput.value = s.url;
-        onLoadClicked(true);
+        loadSong(s.id, s.title, s.channel, true);
         currentSuggestionIndex = index;
       };
       suggestionsEl.appendChild(btn);
     });
   }
   
-  // Initial render
+  // Recently Played Functions
+  function loadRecentlyPlayed() {
+    try {
+      const stored = localStorage.getItem('recentlyPlayedSongs');
+      if (stored) {
+        recentlyPlayedSongs = JSON.parse(stored);
+        renderRecentlyPlayed();
+      }
+    } catch (e) {
+      console.log('Error loading recently played songs:', e);
+      recentlyPlayedSongs = [];
+    }
+  }
+  
+  function addToRecentlyPlayed(videoId, title, channel) {
+    const song = { id: videoId, title, channel, timestamp: Date.now() };
+    
+    // Remove if already exists
+    recentlyPlayedSongs = recentlyPlayedSongs.filter(s => s.id !== videoId);
+    
+    // Add to beginning
+    recentlyPlayedSongs.unshift(song);
+    
+    // Keep only MAX_RECENT_SONGS
+    if (recentlyPlayedSongs.length > MAX_RECENT_SONGS) {
+      recentlyPlayedSongs = recentlyPlayedSongs.slice(0, MAX_RECENT_SONGS);
+    }
+    
+    // Save to localStorage
+    try {
+      localStorage.setItem('recentlyPlayedSongs', JSON.stringify(recentlyPlayedSongs));
+    } catch (e) {
+      console.log('Error saving recently played songs:', e);
+    }
+    
+    renderRecentlyPlayed();
+  }
+  
+  function renderRecentlyPlayed() {
+    if (recentlyPlayedSongs.length === 0) {
+      recentlyPlayedTitle.style.display = 'none';
+      recentlyPlayedEl.innerHTML = '';
+      return;
+    }
+    
+    recentlyPlayedTitle.style.display = 'block';
+    recentlyPlayedEl.innerHTML = '';
+    
+    recentlyPlayedSongs.forEach((song, index) => {
+      const btn = document.createElement('button');
+      btn.className = 'chip recent-chip';
+      btn.innerHTML = `<i class="fas fa-history"></i> ${song.title}`;
+      btn.onclick = () => {
+        loadSong(song.id, song.title, song.channel, true);
+      };
+      recentlyPlayedEl.appendChild(btn);
+    });
+  }
+  
+  function clearRecentlyPlayed() {
+    recentlyPlayedSongs = [];
+    localStorage.removeItem('recentlyPlayedSongs');
+    renderRecentlyPlayed();
+    setStatus('Recently played history cleared', 'ready');
+  }
+  
+  // Favorites Functions
+  function loadFavorites() {
+    try {
+      const stored = localStorage.getItem('favoriteSongs');
+      if (stored) {
+        favoriteSongs = JSON.parse(stored);
+        renderFavorites();
+      }
+    } catch (e) {
+      console.log('Error loading favorites:', e);
+      favoriteSongs = [];
+    }
+  }
+  
+  function addToFavorites(videoId, title, channel) {
+    if (favoriteSongs.some(song => song.id === videoId)) {
+      return false;
+    }
+    
+    const song = { id: videoId, title, channel, timestamp: Date.now() };
+    favoriteSongs.unshift(song);
+    
+    if (favoriteSongs.length > MAX_FAVORITES) {
+      favoriteSongs = favoriteSongs.slice(0, MAX_FAVORITES);
+    }
+    
+    try {
+      localStorage.setItem('favoriteSongs', JSON.stringify(favoriteSongs));
+    } catch (e) {
+      console.log('Error saving favorites:', e);
+    }
+    
+    renderFavorites();
+    updateFavoriteButton();
+    setStatus('Added to favorites! ❤️', 'ready');
+    return true;
+  }
+  
+  function removeFromFavorites(videoId) {
+    favoriteSongs = favoriteSongs.filter(song => song.id !== videoId);
+    
+    try {
+      localStorage.setItem('favoriteSongs', JSON.stringify(favoriteSongs));
+    } catch (e) {
+      console.log('Error saving favorites:', e);
+    }
+    
+    renderFavorites();
+    updateFavoriteButton();
+    setStatus('Removed from favorites', 'ready');
+  }
+  
+  function isFavorite(videoId) {
+    return favoriteSongs.some(song => song.id === videoId);
+  }
+  
+  function renderFavorites() {
+    if (favoriteSongs.length === 0) {
+      favoritesTitle.style.display = 'none';
+      favoritesEl.innerHTML = '';
+      return;
+    }
+    
+    favoritesTitle.style.display = 'block';
+    favoritesEl.innerHTML = '';
+    
+    favoriteSongs.forEach((song, index) => {
+      const btn = document.createElement('button');
+      btn.className = 'chip favorite-chip';
+      btn.innerHTML = `<i class="fas fa-heart"></i> ${song.title}`;
+      btn.onclick = () => {
+        loadSong(song.id, song.title, song.channel, true);
+      };
+      
+      btn.oncontextmenu = (e) => {
+        e.preventDefault();
+        if (confirm(`Remove "${song.title}" from favorites?`)) {
+          removeFromFavorites(song.id);
+        }
+      };
+      
+      favoritesEl.appendChild(btn);
+    });
+  }
+  
+  function updateFavoriteButton() {
+    if (!currentVideoId) return;
+    
+    if (isFavorite(currentVideoId)) {
+      favoriteBtn.innerHTML = '<i class="fas fa-heart"></i>';
+      favoriteBtn.style.color = '#e91e63';
+      favoriteBtn.title = 'Remove from Favorites';
+    } else {
+      favoriteBtn.innerHTML = '<i class="far fa-heart"></i>';
+      favoriteBtn.style.color = '';
+      favoriteBtn.title = 'Add to Favorites';
+    }
+  }
+  
+  function toggleFavorite() {
+    if (!currentVideoId) {
+      setStatus('No song loaded', 'error');
+      return;
+    }
+    
+    if (isFavorite(currentVideoId)) {
+      removeFromFavorites(currentVideoId);
+    } else {
+      addToFavorites(currentVideoId, currentVideoTitle, currentVideoChannel);
+    }
+  }
+  
+  // Repeat & Shuffle Functions
+  function loadPlaybackSettings() {
+    try {
+      const savedRepeat = localStorage.getItem('repeatMode');
+      const savedShuffle = localStorage.getItem('shuffleMode');
+      const savedSpeed = localStorage.getItem('playbackSpeed');
+      
+      if (savedRepeat && ['none', 'one', 'all'].includes(savedRepeat)) {
+        repeatMode = savedRepeat;
+      }
+      
+      if (savedShuffle !== null) {
+        shuffleMode = savedShuffle === 'true';
+      }
+      
+      if (savedSpeed) {
+        const speed = parseFloat(savedSpeed);
+        if (availableSpeeds.includes(speed)) {
+          playbackSpeed = speed;
+        }
+      }
+      
+      updateRepeatButton();
+      updateShuffleButton();
+      updateSpeedButton();
+    } catch (e) {
+      console.log('Error loading playback settings:', e);
+    }
+  }
+  
+  function savePlaybackSettings() {
+    try {
+      localStorage.setItem('repeatMode', repeatMode);
+      localStorage.setItem('shuffleMode', shuffleMode.toString());
+      localStorage.setItem('playbackSpeed', playbackSpeed.toString());
+    } catch (e) {
+      console.log('Error saving playback settings:', e);
+    }
+  }
+  
+  // Speed Control Functions
+  function cyclePlaybackSpeed() {
+    const currentIndex = availableSpeeds.indexOf(playbackSpeed);
+    const nextIndex = (currentIndex + 1) % availableSpeeds.length;
+    playbackSpeed = availableSpeeds[nextIndex];
+    
+    applyPlaybackSpeed();
+    updateSpeedButton();
+    savePlaybackSettings();
+    
+    setStatus(`Speed: ${playbackSpeed}x`, 'ready');
+  }
+  
+  function applyPlaybackSpeed() {
+    if (player && currentVideoId) {
+      try {
+        player.setPlaybackRate(playbackSpeed);
+      } catch(e) {
+        console.log('Error setting playback speed:', e);
+      }
+    }
+  }
+  
+  function updateSpeedButton() {
+    speedBtn.innerHTML = `<span class="speed-text">${playbackSpeed}x</span>`;
+    speedBtn.title = `Playback Speed: ${playbackSpeed}x`;
+    
+    if (playbackSpeed < 1) {
+      speedBtn.style.color = '#ff9800';
+    } else if (playbackSpeed > 1) {
+      speedBtn.style.color = '#4caf50';
+    } else {
+      speedBtn.style.color = '';
+    }
+  }
+  
+  // Song Queue Functions
+  function addToQueue(videoId, title, channel) {
+    if (songQueue.some(song => song.id === videoId)) {
+      setStatus('Song already in queue', 'error');
+      return false;
+    }
+    
+    if (songQueue.length >= MAX_QUEUE_SIZE) {
+      setStatus(`Queue full (max ${MAX_QUEUE_SIZE} songs)`, 'error');
+      return false;
+    }
+    
+    const song = { id: videoId, title, channel, timestamp: Date.now() };
+    songQueue.push(song);
+    
+    try {
+      localStorage.setItem('songQueue', JSON.stringify(songQueue));
+    } catch (e) {
+      console.log('Error saving queue:', e);
+    }
+    
+    renderQueue();
+    setStatus(`Added to queue: ${title}`, 'ready');
+    return true;
+  }
+  
+  function renderQueue() {
+    if (songQueue.length === 0) {
+      queueTitle.style.display = 'none';
+      queueEl.innerHTML = '';
+      return;
+    }
+    
+    queueTitle.style.display = 'block';
+    queueEl.innerHTML = '';
+    
+    songQueue.forEach((song, index) => {
+      const btn = document.createElement('button');
+      btn.className = 'chip queue-chip';
+      btn.innerHTML = `🎵 ${song.title}`;
+      btn.onclick = () => {
+        loadSong(song.id, song.title, song.channel, true);
+        songQueue.splice(index, 1);
+        localStorage.setItem('songQueue', JSON.stringify(songQueue));
+        renderQueue();
+      };
+      
+      btn.oncontextmenu = (e) => {
+        e.preventDefault();
+        songQueue.splice(index, 1);
+        localStorage.setItem('songQueue', JSON.stringify(songQueue));
+        renderQueue();
+        setStatus('Removed from queue', 'ready');
+      };
+      
+      queueEl.appendChild(btn);
+    });
+  }
+  
+  function toggleRepeatMode() {
+    const modes = ['none', 'one', 'all'];
+    const currentIndex = modes.indexOf(repeatMode);
+    repeatMode = modes[(currentIndex + 1) % modes.length];
+    
+    updateRepeatButton();
+    savePlaybackSettings();
+    
+    const modeNames = { none: 'Off', one: 'One', all: 'All' };
+    setStatus(`Repeat: ${modeNames[repeatMode]}`, 'ready');
+  }
+  
+  function toggleShuffleMode() {
+    shuffleMode = !shuffleMode;
+    updateShuffleButton();
+    savePlaybackSettings();
+    
+    if (shuffleMode) {
+      setStatus('Shuffle: On 🔀', 'ready');
+      createShuffledPlaylist();
+    } else {
+      setStatus('Shuffle: Off', 'ready');
+      resetPlaylist();
+    }
+  }
+  
+  function updateRepeatButton() {
+    const icons = {
+      none: '<i class="fas fa-redo"></i>',
+      one: '<i class="fas fa-redo"></i><span style="font-size: 8px;">1</span>',
+      all: '<i class="fas fa-redo"></i>'
+    };
+    
+    const colors = {
+      none: '',
+      one: '#ffc107',
+      all: '#28a745'
+    };
+    
+    const titles = {
+      none: 'Repeat: Off',
+      one: 'Repeat: One',
+      all: 'Repeat: All'
+    };
+    
+    repeatBtn.innerHTML = icons[repeatMode];
+    repeatBtn.style.color = colors[repeatMode];
+    repeatBtn.title = titles[repeatMode];
+  }
+  
+  function updateShuffleButton() {
+    if (shuffleMode) {
+      shuffleBtn.style.color = '#17a2b8';
+      shuffleBtn.title = 'Shuffle: On';
+    } else {
+      shuffleBtn.style.color = '';
+      shuffleBtn.title = 'Shuffle: Off';
+    }
+  }
+  
+  function createPlaylist() {
+    // Create playlist from all available songs
+    currentPlaylist = [...SUGGESTIONS, ...favoriteSongs, ...recentlyPlayedSongs];
+    
+    // Remove duplicates
+    const seen = new Set();
+    currentPlaylist = currentPlaylist.filter(song => {
+      if (seen.has(song.id)) {
+        return false;
+      }
+      seen.add(song.id);
+      return true;
+    });
+    
+    // Find current song index
+    currentPlaylistIndex = currentPlaylist.findIndex(song => song.id === currentVideoId);
+    if (currentPlaylistIndex === -1) currentPlaylistIndex = 0;
+  }
+  
+  function createShuffledPlaylist() {
+    createPlaylist();
+    
+    // Shuffle the playlist but keep current song at the beginning
+    const currentSong = currentPlaylist[currentPlaylistIndex];
+    const otherSongs = currentPlaylist.filter((_, index) => index !== currentPlaylistIndex);
+    
+    // Fisher-Yates shuffle
+    for (let i = otherSongs.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [otherSongs[i], otherSongs[j]] = [otherSongs[j], otherSongs[i]];
+    }
+    
+    currentPlaylist = [currentSong, ...otherSongs];
+    currentPlaylistIndex = 0;
+  }
+  
+  function resetPlaylist() {
+    createPlaylist();
+  }
+  
+  function playNext() {
+    if (currentPlaylist.length === 0) {
+      createPlaylist();
+    }
+    
+    if (currentPlaylist.length === 0) return;
+    
+    if (repeatMode === 'one') {
+      // Replay current song
+      if (player && currentVideoId) {
+        try {
+          player.seekTo(0, true);
+          player.playVideo();
+        } catch(e) {
+          console.log('Error replaying song:', e);
+        }
+      }
+      return;
+    }
+    
+    // Move to next song
+    currentPlaylistIndex++;
+    
+    if (currentPlaylistIndex >= currentPlaylist.length) {
+      if (repeatMode === 'all') {
+        currentPlaylistIndex = 0;
+        if (shuffleMode) {
+          createShuffledPlaylist();
+        }
+      } else {
+        setStatus('Playlist ended', 'ready');
+        return;
+      }
+    }
+    
+    const nextSong = currentPlaylist[currentPlaylistIndex];
+    if (nextSong) {
+      loadSong(nextSong.id, nextSong.title, nextSong.channel, true);
+    }
+  }
+  
+  function playPrevious() {
+    if (currentPlaylist.length === 0) {
+      createPlaylist();
+    }
+    
+    if (currentPlaylist.length === 0) return;
+    
+    currentPlaylistIndex--;
+    
+    if (currentPlaylistIndex < 0) {
+      if (repeatMode === 'all') {
+        currentPlaylistIndex = currentPlaylist.length - 1;
+      } else {
+        currentPlaylistIndex = 0;
+        return;
+      }
+    }
+    
+    const prevSong = currentPlaylist[currentPlaylistIndex];
+    if (prevSong) {
+      loadSong(prevSong.id, prevSong.title, prevSong.channel, true);
+    }
+  }
+  
+  // Keyboard Shortcuts
+  function handleKeyboardShortcuts(e) {
+    if (!keyboardShortcutsEnabled) return;
+    
+    // Don't trigger shortcuts if user is typing in an input field
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    
+    switch(e.code) {
+      case 'Space':
+        e.preventDefault();
+        togglePlayPause();
+        break;
+        
+      case 'ArrowLeft':
+        e.preventDefault();
+        seekBackward();
+        break;
+        
+      case 'ArrowRight':
+        e.preventDefault();
+        seekForward();
+        break;
+        
+      case 'ArrowUp':
+        e.preventDefault();
+        adjustVolume(10);
+        break;
+        
+      case 'ArrowDown':
+        e.preventDefault();
+        adjustVolume(-10);
+        break;
+        
+      case 'KeyM':
+        e.preventDefault();
+        toggleMute();
+        break;
+        
+      case 'KeyF':
+        e.preventDefault();
+        toggleFullscreen();
+        break;
+        
+      case 'Comma':
+        if (e.shiftKey) {
+          e.preventDefault();
+          changePlaybackSpeed(-0.25);
+        }
+        break;
+        
+      case 'Period':
+        if (e.shiftKey) {
+          e.preventDefault();
+          changePlaybackSpeed(0.25);
+        }
+        break;
+        
+      case 'Digit0':
+      case 'Digit1':
+      case 'Digit2':
+      case 'Digit3':
+      case 'Digit4':
+      case 'Digit5':
+      case 'Digit6':
+      case 'Digit7':
+      case 'Digit8':
+      case 'Digit9':
+        e.preventDefault();
+        const percentage = parseInt(e.code.slice(-1)) * 10;
+        seekToPercentage(percentage);
+        break;
+        
+      case 'Home':
+        e.preventDefault();
+        seekToPercentage(0);
+        break;
+        
+      case 'End':
+        e.preventDefault();
+        seekToPercentage(100);
+        break;
+    }
+  }
+  
+  function togglePlayPause() {
+    if (player && currentVideoId) {
+      try {
+        const state = player.getPlayerState();
+        if (state === YT.PlayerState.PLAYING) {
+          player.pauseVideo();
+        } else {
+          player.playVideo();
+        }
+      } catch(e) {
+        console.log('Error with play/pause:', e);
+      }
+    }
+  }
+  
+  function seekBackward() {
+    if (player && currentVideoId) {
+      try {
+        const currentTime = player.getCurrentTime();
+        player.seekTo(Math.max(0, currentTime - 10), true);
+        setStatus('Seeked backward 10s', 'ready');
+      } catch(e) {
+        console.log('Error seeking backward:', e);
+      }
+    }
+  }
+  
+  function seekForward() {
+    if (player && currentVideoId) {
+      try {
+        const currentTime = player.getCurrentTime();
+        const duration = player.getDuration();
+        player.seekTo(Math.min(duration, currentTime + 10), true);
+        setStatus('Seeked forward 10s', 'ready');
+      } catch(e) {
+        console.log('Error seeking forward:', e);
+      }
+    }
+  }
+  
+  function adjustVolume(change) {
+    if (player && currentVideoId) {
+      try {
+        const currentVolume = player.getVolume();
+        const newVolume = Math.max(0, Math.min(100, currentVolume + change));
+        player.setVolume(newVolume);
+        volumeEl.value = newVolume;
+        setStatus(`Volume: ${newVolume}%`, 'ready');
+      } catch(e) {
+        console.log('Error adjusting volume:', e);
+      }
+    }
+  }
+  
+  function toggleMute() {
+    if (player && currentVideoId) {
+      try {
+        if (player.isMuted()) {
+          player.unMute();
+          setStatus('Unmuted', 'ready');
+        } else {
+          player.mute();
+          setStatus('Muted', 'ready');
+        }
+      } catch(e) {
+        console.log('Error toggling mute:', e);
+      }
+    }
+  }
+  
+  function toggleFullscreen() {
+    if (document.fullscreenElement) {
+      document.exitFullscreen();
+      setStatus('Exited fullscreen', 'ready');
+    } else {
+      document.documentElement.requestFullscreen();
+      setStatus('Entered fullscreen', 'ready');
+    }
+  }
+  
+  function changePlaybackSpeed(change) {
+    if (player && currentVideoId) {
+      try {
+        const currentRate = player.getPlaybackRate();
+        const newRate = Math.max(0.25, Math.min(2, currentRate + change));
+        player.setPlaybackRate(newRate);
+        setStatus(`Speed: ${newRate}x`, 'ready');
+      } catch(e) {
+        console.log('Error changing playback speed:', e);
+      }
+    }
+  }
+  
+  function seekToPercentage(percentage) {
+    if (player && currentVideoId) {
+      try {
+        const duration = player.getDuration();
+        const targetTime = (percentage / 100) * duration;
+        player.seekTo(targetTime, true);
+        setStatus(`Seeked to ${percentage}%`, 'ready');
+      } catch(e) {
+        console.log('Error seeking to percentage:', e);
+      }
+    }
+  }
+  
+  // Theme Functions
+  function loadTheme() {
+    try {
+      const saved = localStorage.getItem('selectedTheme');
+      if (saved && themes[saved]) {
+        currentTheme = saved;
+        applyTheme(currentTheme);
+      }
+    } catch (e) {
+      console.log('Error loading theme:', e);
+    }
+  }
+  
+  function applyTheme(themeKey) {
+    // Remove all theme classes
+    Object.values(themes).forEach(theme => {
+      if (theme.class) {
+        document.body.classList.remove(theme.class);
+      }
+    });
+    
+    // Apply new theme
+    if (themes[themeKey] && themes[themeKey].class) {
+      document.body.classList.add(themes[themeKey].class);
+    }
+    
+    currentTheme = themeKey;
+    
+    // Save to localStorage
+    try {
+      localStorage.setItem('selectedTheme', themeKey);
+    } catch (e) {
+      console.log('Error saving theme:', e);
+    }
+    
+    setStatus(`Theme changed to ${themes[themeKey].name}`, 'ready');
+  }
+  
+  function showThemeSelector() {
+    const themeOptions = Object.entries(themes)
+      .map(([key, theme]) => `${key === currentTheme ? '✓' : ' '} ${theme.name}`)
+      .join('\n');
+    
+    const selection = prompt(`Choose a theme:\n\n${themeOptions}\n\nEnter: default, light, ocean, forest, sunset, neon, or rose`);
+    
+    if (selection && themes[selection.toLowerCase()]) {
+      applyTheme(selection.toLowerCase());
+    }
+  }
+  
+  // Add keyboard shortcut help
+  function showKeyboardHelp() {
+    const helpText = `
+Keyboard Shortcuts:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SPACE          Play/Pause
+← →            Seek backward/forward (10s)
+↑ ↓            Volume up/down
+M              Mute/Unmute
+F              Toggle fullscreen
+0-9            Seek to percentage (0% to 90%)
+HOME           Seek to beginning
+END            Seek to end
+SHIFT + <      Decrease speed
+SHIFT + >      Increase speed
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`;
+    
+    alert(helpText);
+  }
+  
+  // Event listeners for keyboard shortcuts
+  document.addEventListener('keydown', handleKeyboardShortcuts);
+  
+  // Event listeners for recently played
+  clearHistoryBtn.addEventListener('click', () => {
+    if (confirm('Clear your recently played history?')) {
+      clearRecentlyPlayed();
+    }
+  });
+  
+  // Initial renders
+  loadTheme();
+  loadPlaybackSettings();
+  loadFavorites();
+  loadRecentlyPlayed();
+  // Load queue
+  try {
+    const stored = localStorage.getItem('songQueue');
+    if (stored) {
+      songQueue = JSON.parse(stored);
+      renderQueue();
+    }
+  } catch (e) {
+    console.log('Error loading queue:', e);
+    songQueue = [];
+  }
   renderSuggestions();
+  
+  // Event listeners for favorites
+  favoriteBtn.addEventListener('click', toggleFavorite);
+  
+  clearFavoritesBtn.addEventListener('click', () => {
+    if (confirm('Clear all your favorite songs?')) {
+      favoriteSongs = [];
+      localStorage.removeItem('favoriteSongs');
+      renderFavorites();
+      updateFavoriteButton();
+      setStatus('All favorites cleared', 'ready');
+    }
+  });
+  
+  // Event listeners for repeat & shuffle
+  repeatBtn.addEventListener('click', toggleRepeatMode);
+  shuffleBtn.addEventListener('click', toggleShuffleMode);
+  
+  // Event listener for speed control
+  speedBtn.addEventListener('click', cyclePlaybackSpeed);
+  
+  // Event listeners for queue
+  clearQueueBtn.addEventListener('click', () => {
+    if (confirm('Clear all songs from queue?')) {
+      songQueue = [];
+      localStorage.removeItem('songQueue');
+      renderQueue();
+      setStatus('Queue cleared', 'ready');
+    }
+  });
+  
+  // Update prev/next button functionality
+  prevBtn.addEventListener('click', playPrevious);
+  nextBtn.addEventListener('click', playNext);
+  
+  // Event listeners for search
+  searchTab.addEventListener('click', switchToSearchTab);
+  urlTab.addEventListener('click', switchToUrlTab);
+  
+  searchBtn.addEventListener('click', () => {
+    performSearch(searchInput.value);
+  });
+  
+  searchInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      performSearch(searchInput.value);
+    }
+  });
+  
+  // Real-time search with debouncing
+  searchInput.addEventListener('input', (e) => {
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(() => {
+      if (e.target.value.trim().length > 2) {
+        performSearch(e.target.value);
+      }
+    }, 500);
+  });
 
   // YouTube API ready
   function onYouTubeIframeAPIReady() {
@@ -677,7 +2192,9 @@
           onReady: function(e) {
             console.log('YouTube player ready');
             try { 
-              player.setVolume(parseInt(volumeEl.value,10)); 
+              player.setVolume(parseInt(volumeEl.value,10));
+              // Apply saved speed
+              setTimeout(() => applyPlaybackSpeed(), 100); 
             } catch(e){ console.log('Volume set error:', e); }
             
             if (startSeconds > 0) {
@@ -729,9 +2246,9 @@
       setStatus('Song ended - playing next...', 'ready'); 
       stopProgress(); 
       progressFill.style.width = '100%';
-      // Autoplay next song
+      // Autoplay next song based on repeat mode
       setTimeout(() => {
-        playNextSong();
+        playNext();
       }, 1000);
     }
     else if (s === YT.PlayerState.BUFFERING) { 
