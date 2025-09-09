@@ -381,20 +381,6 @@
     background: var(--error);
   }
 
-  .troubleshoot {
-    color: var(--text-secondary);
-    text-decoration: none;
-    font-size: 13px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    transition: var(--transition);
-  }
-
-  .troubleshoot:hover {
-    color: var(--accent);
-  }
-
   @keyframes pulse {
     0% { opacity: 1; }
     50% { opacity: 0.5; }
@@ -430,12 +416,6 @@
     .volume-container {
       display: none;
     }
-    
-    .status-bar {
-      flex-direction: column;
-      gap: 10px;
-      text-align: center;
-    }
   }
 
   /* Loading animation */
@@ -452,39 +432,6 @@
   @keyframes spin {
     to { transform: rotate(360deg); }
   }
-
-  /* Wave animation for playing state */
-  .wave {
-    display: flex;
-    align-items: center;
-    gap: 3px;
-    height: 20px;
-  }
-
-  .wave-bar {
-    width: 3px;
-    height: 100%;
-    background: var(--accent);
-    border-radius: 3px;
-    animation: wave 1.2s infinite ease-in-out;
-  }
-
-  .wave-bar:nth-child(2) {
-    animation-delay: 0.1s;
-  }
-
-  .wave-bar:nth-child(3) {
-    animation-delay: 0.2s;
-  }
-
-  .wave-bar:nth-child(4) {
-    animation-delay: 0.3s;
-  }
-
-  @keyframes wave {
-    0%, 100% { height: 40%; }
-    50% { height: 100%; }
-  }
 </style>
 </head>
 <body>
@@ -497,15 +444,23 @@
     <div class="input-group">
       <input id="urlInput" type="text" placeholder="Paste YouTube URL or ID here" inputmode="url" />
       <button id="loadBtn">
-        <i class="fas fa-download"></i> Load
+        <i class="fas fa-play"></i> Load
+      </button>
+      <button id="downloadBtn" style="padding: 16px 20px; border-radius: 12px; border: none; background: var(--success); color: white; font-weight: 600; cursor: pointer; transition: var(--transition); display: flex; align-items: center; gap: 8px;">
+        <i class="fas fa-download"></i> Download
       </button>
     </div>
 
-    <div class="section-title">Popular Songs</div>
+    <div class="section-title">
+      Popular Songs 
+      <button id="refreshSuggestions" style="margin-left: 10px; padding: 5px 10px; border: none; background: var(--accent); color: white; border-radius: 5px; cursor: pointer; font-size: 12px;">
+        <i class="fas fa-sync-alt"></i> Refresh
+      </button>
+    </div>
     <div class="chips" id="suggestions"></div>
 
     <div class="player-container">
-      <div class="thumbnail-container" id="playerThumb">
+      <div class="thumbnail-container" id="playerContainer">
         <img class="thumbnail" id="thumbnailImg" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjE4MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMTUyMDMzIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzlhYTRiMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk5vIHNvbmcgbG9hZGVkPC90ZXh0Pjwvc3ZnPg==" alt="No song loaded">
         <div class="thumbnail-overlay">
           <button class="play-thumb-button" id="thumbPlay">
@@ -554,40 +509,46 @@
         <div class="status-dot ready" id="statusDot"></div>
         <div class="status-text" id="status">Ready - paste a link or select a song</div>
       </div>
-      <a href="#" class="troubleshoot" id="troubleLink">
-        <i class="fas fa-question-circle"></i> Having issues?
-      </a>
     </div>
   </div>
 
-  <!-- load YouTube Iframe API -->
   <script src="https://www.youtube.com/iframe_api"></script>
   <script>
-  console.log('YouTube Audio Player - Updated Version Loaded');
-  alert('JavaScript loaded successfully - ready to play!');
-  /**********************
-   * Settings & samples *
-   **********************/
-  const SUGGESTIONS = [
+  console.log('Fresh YouTube Audio Player Loaded - No Cache Version');
+
+  // Settings & samples
+  let SUGGESTIONS = [
     { title: "Arijit Singh - Tum Hi Ho", channel: "Arijit Singh", url: "https://www.youtube.com/watch?v=Umqb9KENgmk", id: "Umqb9KENgmk" },
     { title: "Coldplay - Adventure of a Lifetime", channel: "Coldplay", url: "https://www.youtube.com/watch?v=QtXby3twMmI", id: "QtXby3twMmI" },
     { title: "Ed Sheeran - Shape of You", channel: "Ed Sheeran", url: "https://www.youtube.com/watch?v=JGwWNGJdvx8", id: "JGwWNGJdvx8" },
     { title: "The Weeknd - Blinding Lights", channel: "The Weeknd", url: "https://www.youtube.com/watch?v=4NRXx6U8ABQ", id: "4NRXx6U8ABQ" }
   ];
 
-  /**********************
-   * UI & DOM references *
-   **********************/
+  // More trending songs to rotate through
+  const TRENDING_SUGGESTIONS = [
+    { title: "Dua Lipa - Levitating", channel: "Dua Lipa", url: "https://www.youtube.com/watch?v=TUVcZfQe-Kw", id: "TUVcZfQe-Kw" },
+    { title: "Harry Styles - As It Was", channel: "Harry Styles", url: "https://www.youtube.com/watch?v=H5v3kku4y6Q", id: "H5v3kku4y6Q" },
+    { title: "Billie Eilish - bad guy", channel: "Billie Eilish", url: "https://www.youtube.com/watch?v=DyDfgMOUjCI", id: "DyDfgMOUjCI" },
+    { title: "Post Malone - Circles", channel: "Post Malone", url: "https://www.youtube.com/watch?v=wXhTHyIgQ_U", id: "wXhTHyIgQ_U" },
+    { title: "Olivia Rodrigo - drivers license", channel: "Olivia Rodrigo", url: "https://www.youtube.com/watch?v=ZmDBbnmKpqQ", id: "ZmDBbnmKpqQ" },
+    { title: "Glass Animals - Heat Waves", channel: "Glass Animals", url: "https://www.youtube.com/watch?v=mRD0-GxqHVo", id: "mRD0-GxqHVo" },
+    { title: "Lil Nas X - MONTERO", channel: "Lil Nas X", url: "https://www.youtube.com/watch?v=6swmTBVI83c", id: "6swmTBVI83c" },
+    { title: "Taylor Swift - Anti-Hero", channel: "Taylor Swift", url: "https://www.youtube.com/watch?v=b1kbLWvqugk", id: "b1kbLWvqugk" }
+  ];
+
+  // UI & DOM references
   const suggestionsEl = document.getElementById('suggestions');
   const urlInput = document.getElementById('urlInput');
   const loadBtn = document.getElementById('loadBtn');
+  const downloadBtn = document.getElementById('downloadBtn');
+  const refreshBtn = document.getElementById('refreshSuggestions');
   const playPauseBtn = document.getElementById('playPause');
   const prevBtn = document.getElementById('prevBtn');
   const nextBtn = document.getElementById('nextBtn');
   const volumeEl = document.getElementById('volume');
   const statusEl = document.getElementById('status');
   const statusDot = document.getElementById('statusDot');
-  const playerThumb = document.getElementById('playerThumb');
+  const playerContainer = document.getElementById('playerContainer');
   const thumbnailImg = document.getElementById('thumbnailImg');
   const thumbPlay = document.getElementById('thumbPlay');
   const progressBar = document.getElementById('progressBar');
@@ -596,11 +557,8 @@
   const timeDurEl = document.getElementById('timeDur');
   const songTitleEl = document.getElementById('songTitle');
   const songChannelEl = document.getElementById('songChannel');
-  const troubleLink = document.getElementById('troubleLink');
 
-  /**********************
-   * Player state vars  *
-   **********************/
+  // Player state vars
   let player = null;
   let fallbackIframe = null;
   let ytReady = false;
@@ -611,9 +569,7 @@
   let isPlaying = false;
   let currentSuggestionIndex = 0;
 
-  /**********************
-   * Helpers            *
-   **********************/
+  // Helpers
   function extractVideoID(input) {
     if (!input) return null;
     input = input.trim();
@@ -655,79 +611,102 @@
     }
   }
 
-  /**********************
-   * Render suggestions  *
-   **********************/
-  SUGGESTIONS.forEach((s, index) => {
-    const btn = document.createElement('button');
-    btn.className = 'chip';
-    btn.innerHTML = `<i class="fas fa-music"></i> ${s.title}`;
-    btn.onclick = () => {
-      urlInput.value = s.url;
-      onLoadClicked(true);
-      currentSuggestionIndex = index;
-    };
-    suggestionsEl.appendChild(btn);
-  });
+  // Render suggestions
+  function renderSuggestions() {
+    suggestionsEl.innerHTML = '';
+    SUGGESTIONS.forEach((s, index) => {
+      const btn = document.createElement('button');
+      btn.className = 'chip';
+      btn.innerHTML = `<i class="fas fa-music"></i> ${s.title}`;
+      btn.onclick = () => {
+        urlInput.value = s.url;
+        onLoadClicked(true);
+        currentSuggestionIndex = index;
+      };
+      suggestionsEl.appendChild(btn);
+    });
+  }
+  
+  // Initial render
+  renderSuggestions();
 
-  /**********************
-   * YouTube API ready  *
-   **********************/
+  // YouTube API ready
   function onYouTubeIframeAPIReady() {
     ytReady = true;
     setStatus('YouTube API ready', 'ready');
   }
   window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
 
-  /**********************
-   * Create YT player   *
-   **********************/
+  // Create YT player - FIXED VERSION
   function createYTPlayer(videoId, autoplay = true, startSeconds = 0) {
     console.log('createYTPlayer called with videoId:', videoId);
+    
+    // Clear any existing content
     if (fallbackIframe) {
       try { fallbackIframe.remove(); } catch(e) {}
       fallbackIframe = null;
     }
     
-    playerThumb.innerHTML = '';
-    const div = document.createElement('div');
-    div.id = 'ytplayer_inner';
-    playerThumb.appendChild(div);
-
-    player = new YT.Player('ytplayer_inner', {
-      width: '100%', 
-      height: '100%', 
-      videoId: videoId,
-      playerVars: {
-        autoplay: autoplay ? 1 : 0,
-        playsinline: 1,
-        controls: 0,
-        rel: 0,
-        modestbranding: 1,
-        enablejsapi: 1,
-        origin: location.origin || 'null'
-      },
-      events: {
-        onReady: function(e) {
-          try { player.setVolume(parseInt(volumeEl.value,10)); } catch(e){}
-          if (startSeconds > 0) try { player.seekTo(startSeconds, true); } catch(e){}
-          if (autoplay) {
-            try { 
-              player.playVideo(); 
-              isPlaying = true;
-              updatePlayButton();
-            } catch(e){}
-          }
-          setStatus('Playing', 'playing');
-          startProgress();
+    // Use the correct container reference
+    playerContainer.innerHTML = `
+      <img class="thumbnail" id="thumbnailImg" src="https://i.ytimg.com/vi/${videoId}/hqdefault.jpg" alt="${currentVideoTitle}">
+      <div class="thumbnail-overlay">
+        <button class="play-thumb-button" id="thumbPlay">
+          <i class="fas fa-pause"></i>
+        </button>
+      </div>
+      <div id="ytplayer_inner"></div>
+    `;
+    
+    // Create the YouTube player
+    try {
+      player = new YT.Player('ytplayer_inner', {
+        width: '100%', 
+        height: '100%', 
+        videoId: videoId,
+        playerVars: {
+          autoplay: autoplay ? 1 : 0,
+          playsinline: 1,
+          controls: 0,
+          rel: 0,
+          modestbranding: 1,
+          enablejsapi: 1,
+          origin: location.origin || 'null'
         },
-        onStateChange: onPlayerStateChange,
-        onError: function(e) {
-          setStatus('Error playing video', 'error');
-          console.error('YouTube player error:', e);
+        events: {
+          onReady: function(e) {
+            console.log('YouTube player ready');
+            try { 
+              player.setVolume(parseInt(volumeEl.value,10)); 
+            } catch(e){ console.log('Volume set error:', e); }
+            
+            if (startSeconds > 0) {
+              try { 
+                player.seekTo(startSeconds, true); 
+              } catch(e){ console.log('Seek error:', e); }
+            }
+            
+            if (autoplay) {
+              try { 
+                player.playVideo(); 
+                isPlaying = true;
+                updatePlayButton();
+                setStatus('Playing', 'playing');
+                startProgress();
+              } catch(e){ console.log('Play error:', e); }
+            }
+          },
+          onStateChange: onPlayerStateChange,
+          onError: function(e) {
+            setStatus('Error playing video', 'error');
+            console.error('YouTube player error:', e);
+          }
         }
-      }
-    });
+      });
+    } catch(e) {
+      console.error('Error creating YouTube player:', e);
+      createFallbackIframe(videoId);
+    }
   }
 
   function onPlayerStateChange(ev) {
@@ -747,9 +726,13 @@
     else if (s === YT.PlayerState.ENDED) { 
       isPlaying = false;
       updatePlayButton();
-      setStatus('Ended', 'ready'); 
+      setStatus('Song ended - playing next...', 'ready'); 
       stopProgress(); 
       progressFill.style.width = '100%';
+      // Autoplay next song
+      setTimeout(() => {
+        playNextSong();
+      }, 1000);
     }
     else if (s === YT.PlayerState.BUFFERING) { 
       setStatus('Buffering...', 'paused'); 
@@ -762,24 +745,25 @@
   function updatePlayButton() {
     if (isPlaying) {
       playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-      thumbPlay.innerHTML = '<i class="fas fa-pause"></i>';
+      const thumbBtn = document.getElementById('thumbPlay');
+      if (thumbBtn) thumbBtn.innerHTML = '<i class="fas fa-pause"></i>';
     } else {
       playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
-      thumbPlay.innerHTML = '<i class="fas fa-play"></i>';
+      const thumbBtn = document.getElementById('thumbPlay');
+      if (thumbBtn) thumbBtn.innerHTML = '<i class="fas fa-play"></i>';
     }
   }
 
-  /**********************
-   * Fallback iframe    *
-   **********************/
+  // Fallback iframe
   function createFallbackIframe(videoId) {
+    console.log('Creating fallback iframe for:', videoId);
     if (fallbackIframe) try { fallbackIframe.remove(); } catch(e){}
     if (player) {
       try { player.destroy(); } catch(e){}
       player = null;
     }
     
-    playerThumb.innerHTML = '';
+    playerContainer.innerHTML = '';
     const ifr = document.createElement('iframe');
     ifr.className = 'yt';
     ifr.style.width = '100%';
@@ -787,7 +771,7 @@
     ifr.src = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&playsinline=1&controls=0&rel=0&modestbranding=1&enablejsapi=1';
     ifr.allow = 'autoplay; encrypted-media; fullscreen';
     ifr.setAttribute('frameborder','0');
-    playerThumb.appendChild(ifr);
+    playerContainer.appendChild(ifr);
     fallbackIframe = ifr;
     
     isPlaying = true;
@@ -800,9 +784,7 @@
     timeDurEl.textContent = '—';
   }
 
-  /**********************
-   * UI: Load, Play, Stop
-   **********************/
+  // UI: Load, Play, Stop
   function onLoadClicked(userGesture = false) {
     const id = extractVideoID(urlInput.value);
     if (!id) { 
@@ -835,172 +817,175 @@
       } else {
         createFallbackIframe(id);
       }
-      
       loadBtn.innerHTML = '<i class="fas fa-download"></i> Load';
       loadBtn.disabled = false;
     }, 500);
   }
 
-  loadBtn.addEventListener('click', () => onLoadClicked(true));
-  urlInput.addEventListener('keydown', (e) => { 
-    if (e.key === 'Enter') onLoadClicked(true); 
-  });
-
-  playPauseBtn.addEventListener('click', () => {
-    if (!currentVideoId) {
-      const id = extractVideoID(urlInput.value);
-      if (id) { 
-        currentVideoId = id;
-        onLoadClicked(true);
-      } else { 
-        setStatus('No video loaded', 'error'); 
-        return; 
-      }
-    }
-
-    if (ytReady && !player) {
-      createYTPlayer(currentVideoId, true);
-      return;
-    }
-
-    if (player) {
-      const st = player.getPlayerState();
-      if (st === YT.PlayerState.PLAYING) { 
-        player.pauseVideo(); 
-      } else { 
-        player.playVideo(); 
-      }
-      return;
-    }
-
-    if (fallbackIframe) {
-      try {
-        const cmd = isPlaying ? 'pauseVideo' : 'playVideo';
-        fallbackIframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func: cmd, args: [] }), '*');
-        isPlaying = !isPlaying;
-        updatePlayButton();
-        setStatus(isPlaying ? 'Playing' : 'Paused', isPlaying ? 'playing' : 'paused');
-      } catch (e) {
-        fallbackIframe.src = fallbackIframe.src;
-      }
-      return;
-    }
-
-    createFallbackIframe(currentVideoId);
-  });
-
-  thumbPlay.addEventListener('click', () => {
-    if (!currentVideoId && urlInput.value) {
-      currentVideoId = extractVideoID(urlInput.value);
-    }
-    if (!currentVideoId) { 
-      setStatus('No video to play', 'error'); 
-      return; 
-    }
-    
-    if (ytReady) {
-      createYTPlayer(currentVideoId, true);
-    } else {
-      createFallbackIframe(currentVideoId);
-    }
-  });
-
-  // Previous and Next buttons for suggestions
-  prevBtn.addEventListener('click', () => {
-    currentSuggestionIndex = (currentSuggestionIndex - 1 + SUGGESTIONS.length) % SUGGESTIONS.length;
-    const suggestion = SUGGESTIONS[currentSuggestionIndex];
-    urlInput.value = suggestion.url;
-    onLoadClicked(true);
-  });
-
-  nextBtn.addEventListener('click', () => {
-    currentSuggestionIndex = (currentSuggestionIndex + 1) % SUGGESTIONS.length;
-    const suggestion = SUGGESTIONS[currentSuggestionIndex];
-    urlInput.value = suggestion.url;
-    onLoadClicked(true);
-  });
-
-  volumeEl.addEventListener('input', () => {
-    if (player) {
-      try { player.setVolume(parseInt(volumeEl.value,10)); } catch(e){}
-    }
-  });
-
-  /**********************
-   * Progress handling   *
-   **********************/
+  // Progress tracking functions
   function startProgress() {
     stopProgress();
-    if (!player) return;
-    
-    progressTimer = setInterval(() => {
-      try {
-        const cur = player.getCurrentTime();
-        const dur = player.getDuration() || 0;
-        if (dur > 0) {
-          const pct = (cur / dur) * 100;
-          progressFill.style.width = pct + '%';
-          timeCurEl.textContent = formatTime(cur);
-          timeDurEl.textContent = formatTime(dur);
-        } else {
-          timeCurEl.textContent = formatTime(cur);
-          timeDurEl.textContent = '—';
-        }
-      } catch (e) {}
-    }, 500);
+    progressTimer = setInterval(updateProgress, 1000);
   }
-  
+
   function stopProgress() {
-    if (progressTimer) { 
-      clearInterval(progressTimer); 
-      progressTimer = null; 
+    if (progressTimer) {
+      clearInterval(progressTimer);
+      progressTimer = null;
     }
   }
 
-  progressBar.addEventListener('click', (e) => {
-    if (!player) return;
-    
-    const rect = progressBar.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const percentage = x / rect.width;
+  function updateProgress() {
+    if (!player || !player.getCurrentTime) return;
     
     try {
-      const dur = player.getDuration() || 0;
-      const time = dur * percentage;
-      player.seekTo(time, true);
-      progressFill.style.width = (percentage * 100) + '%';
-      timeCurEl.textContent = formatTime(time);
-    } catch(e){}
+      const current = player.getCurrentTime();
+      const duration = player.getDuration();
+      
+      if (current && duration) {
+        const percent = (current / duration) * 100;
+        progressFill.style.width = percent + '%';
+        timeCurEl.textContent = formatTime(current);
+        timeDurEl.textContent = formatTime(duration);
+      }
+    } catch(e) {
+      console.log('Progress update error:', e);
+    }
+  }
+
+  // Event listeners
+  loadBtn.onclick = () => onLoadClicked(true);
+
+  playPauseBtn.onclick = () => {
+    if (!player && !fallbackIframe) {
+      if (currentVideoId) {
+        if (ytReady) {
+          createYTPlayer(currentVideoId, true);
+        } else {
+          createFallbackIframe(currentVideoId);
+        }
+      }
+      return;
+    }
+
+    if (player && player.getPlayerState) {
+      try {
+        const state = player.getPlayerState();
+        if (state === YT.PlayerState.PLAYING) {
+          player.pauseVideo();
+        } else {
+          player.playVideo();
+        }
+      } catch(e) {
+        console.log('Play/pause error:', e);
+      }
+    }
+  };
+
+  // Thumbnail play button
+  document.addEventListener('click', (e) => {
+    if (e.target.id === 'thumbPlay' || e.target.parentElement?.id === 'thumbPlay') {
+      playPauseBtn.click();
+    }
   });
 
-  /**********************
-   * Troubleshooting     *
-   **********************/
-  troubleLink.addEventListener('click', (e) => {
-    e.preventDefault();
-    setStatus('Try using HTTP instead of file://. On mobile, use a web server app.', 'warning');
+  volumeEl.oninput = () => {
+    if (player && player.setVolume) {
+      try {
+        player.setVolume(parseInt(volumeEl.value, 10));
+      } catch(e) {
+        console.log('Volume change error:', e);
+      }
+    }
+  };
+
+  // Navigation and autoplay functions
+  function playNextSong() {
+    if (currentSuggestionIndex < SUGGESTIONS.length - 1) {
+      currentSuggestionIndex++;
+    } else {
+      // Loop back to first song
+      currentSuggestionIndex = 0;
+    }
+    const next = SUGGESTIONS[currentSuggestionIndex];
+    urlInput.value = next.url;
+    onLoadClicked(true);
+  }
+
+  function playPrevSong() {
+    if (currentSuggestionIndex > 0) {
+      currentSuggestionIndex--;
+    } else {
+      // Loop to last song
+      currentSuggestionIndex = SUGGESTIONS.length - 1;
+    }
+    const prev = SUGGESTIONS[currentSuggestionIndex];
+    urlInput.value = prev.url;
+    onLoadClicked(true);
+  }
+
+  // Navigation buttons
+  prevBtn.onclick = () => {
+    playPrevSong();
+  };
+
+  nextBtn.onclick = () => {
+    playNextSong();
+  };
+
+  progressBar.onclick = (e) => {
+    if (!player || !player.getDuration) return;
     
-    // Show more detailed help after a delay
-    setTimeout(() => {
-      alert("Troubleshooting Tips:\n\n1. Use http:// instead of file://\n2. On Android, try 'Simple HTTP Server' app\n3. On PC, run: python -m http.server\n4. Then open your browser to the shown IP address");
-    }, 500);
-  });
+    try {
+      const duration = player.getDuration();
+      const rect = progressBar.getBoundingClientRect();
+      const percent = (e.clientX - rect.left) / rect.width;
+      const seekTo = duration * percent;
+      player.seekTo(seekTo, true);
+    } catch(e) {
+      console.log('Seek error:', e);
+    }
+  };
 
-  /**********************
-   * Small startup UX   *
-   **********************/
-  setStatus('Ready - paste a link or select a song', 'ready');
-  updatePlayButton();
+  // Refresh suggestions functionality
+  function refreshSuggestions() {
+    // Randomly select 4 songs from trending suggestions
+    const shuffled = [...TRENDING_SUGGESTIONS].sort(() => 0.5 - Math.random());
+    SUGGESTIONS = shuffled.slice(0, 4);
+    renderSuggestions();
+    setStatus('Suggestions refreshed!', 'ready');
+  }
 
-  // Add wave animation to playing state
-  const waveAnimation = document.createElement('div');
-  waveAnimation.className = 'wave';
-  waveAnimation.innerHTML = '<div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>';
-  statusEl.parentNode.appendChild(waveAnimation);
-  waveAnimation.style.display = 'none';
+  // Download functionality
+  function downloadAudio() {
+    const id = extractVideoID(urlInput.value);
+    if (!id) {
+      setStatus('Please enter a valid YouTube URL first', 'error');
+      return;
+    }
+    
+    // Create download link using yt-dlp compatible service
+    const downloadUrl = `https://loader.to/api/button/?f=mp3&color=ff0000&url=https://www.youtube.com/watch?v=${id}`;
+    
+    // Open download page in new tab
+    const downloadWindow = window.open(downloadUrl, '_blank');
+    if (downloadWindow) {
+      setStatus('Opening download page...', 'ready');
+    } else {
+      // Fallback - create a temporary link
+      const link = document.createElement('a');
+      link.href = downloadUrl;
+      link.target = '_blank';
+      link.click();
+      setStatus('Download initiated', 'ready');
+    }
+  }
 
-  // Expose functions for debugging
-  window._yt = { createYTPlayer, createFallbackIframe, extractVideoID };
+  // Event listeners for new buttons
+  refreshBtn.onclick = refreshSuggestions;
+  downloadBtn.onclick = downloadAudio;
+
+  console.log('YouTube Audio Player fully initialized with autoplay, dynamic suggestions, and download support');
   </script>
 </body>
 </html>
